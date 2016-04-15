@@ -5,6 +5,7 @@ public class Producto {
 	private int codProducto;
 	private String descripcion;
 	private int stock;
+	private float importe;
 	
 	public int getCodProducto() {
 		return codProducto;
@@ -24,5 +25,12 @@ public class Producto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	public float getImporte() {
+		return importe;
+	}
+	public void setImporte(float importe) {
+		this.importe = importe;
+	}
+	
 	
 }
