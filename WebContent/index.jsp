@@ -11,8 +11,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery-1.12.3.min.js"></script>
-
-   
   </head>
   <body>
   
