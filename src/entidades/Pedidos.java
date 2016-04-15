@@ -8,7 +8,28 @@ public class Pedidos {
 	private Date fecha_pedido;
 	private Date fecha_cancelacion;
 	private Persona cliente;
+	private Estado_pedido estado;
+	private Linea_pedido [] lineas;
 	
+	public Linea_pedido[] getLineas() {
+		return lineas;
+	}
+	public void setLineas(Linea_pedido[] lineas) {
+		this.lineas = lineas;
+	} 
+	
+	public Estado_pedido getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado_pedido estado) {
+		this.estado = estado;
+	}
+	public Persona getCliente() {
+		return cliente;
+	}
+	public void setCliente(Persona cliente) {
+		this.cliente = cliente;
+	}
 	public int getNumero_pedido() {
 		return numero_pedido;
 	}
