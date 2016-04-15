@@ -1,0 +1,25 @@
+#marca{
+	color:#FFFFFF;
+}
+.navbar{
+	background:#00D3ED;
+}
+nav.navbar ul.nav a{
+	color:#FFFFFF;
+}
+nav.navbar ul.nav a:hover{
+	color:#FFFFFF;
+	background:#000000;
+}
+nav.navbar ul.nav li.active a{
+	background:#FFFFFF;
+	color:#00D3ED;
+}
+
+nav.navbar ul.nav a{
+	color:#FFFFFF;
+}
+
+#navbar li.dropdown ul.dropdown-menu {
+	background:#00D3ED;
+}
