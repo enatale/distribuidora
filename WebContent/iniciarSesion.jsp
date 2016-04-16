@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -23,17 +23,27 @@
     <div class="row">
     	<div class="col-sm-6 col-sm-offset-3">
             <form action="iniciarSesion" method="post" id="formLogin">
-                <h1>Iniciar sesión</h1>
+                <h1>Iniciar sesiÃ³n</h1>
                 <label for="txtUsuario" class="sr-only">Nombre de usuario</label>
                 <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" placeholder="Nombre de usuario">
                 <label for="txtUsuario" id="errorUsuario" style="color:#FF0004"></label>
                 
-                <label for="txtPass" class="sr-only">Contraseña</label>
-                <input type="password" id="txtPass" name="txtPass" class="form-control" placeholder="Contraseña">
+                <label for="txtPass" class="sr-only">ContraseÃ±a</label>
+                <input type="password" id="txtPass" name="txtPass" class="form-control" placeholder="ContraseÃ±a">
                 <label for="txtPass" id="errorPass" style="color:#FF0004"></label>
                 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
             </form>
+            <% 
+      			String mensaje=(String)request.getAttribute("mensaje");
+        		if(mensaje!=null){
+      		%>
+      			<div class="alert alert-danger" role="alert">
+        			<strong>Error!</strong> <%=mensaje %>
+      			</div>
+      		<%
+        		}
+      		%>
         </div>
     </div> 
 	</div><!-- /container -->

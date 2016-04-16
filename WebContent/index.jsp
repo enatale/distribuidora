@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -12,6 +12,11 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#liIndex").addClass("active");
+    	});
+    </script>
   </head>
   <body>
   

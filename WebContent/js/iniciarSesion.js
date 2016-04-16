@@ -1,30 +1,29 @@
 $(document).ready(function() {
+	$("#liIniciarSesion").addClass("active");
+//VALIDACION AL ENVIAR FORMULARIO
+	$("#formLogin").submit(function() {
+		var usuario=validarUsuario();
+		var pass= validarPass();
+		if(pass&&usuario){
+			return true;
+		} else {
+			return false;
+		}
+	});//formLogin Submit
 			
-			//VALIDACION AL ENVIAR FORMULARIO
-            $("#formLogin").submit(function() {
-				var usuario=validarUsuario();
-				var pass= validarPass();
-				if(pass&&usuario){
-					return true;
-				} else {
-					return false;
-				}
-
-            });//formLogin Submit
+//VALIDACION CUANDO CAMBIO EL FOCO
+	$("#txtUsuario").focusout(function(e) {
+		validarUsuario();
+	});
+	$("#txtPass").focusout(function(e) {
+		validarPass();
+	});
+//Pongo en blanco los campos cuando empiezo a escribir
+	$("input").keydown(function(){
+		$(this).attr("style","background:#FFF");
+	})
 			
-			//VALIDACION CUANDO CAMBIO EL FOCO
-			$("#txtUsuario").focusout(function(e) {
-				validarUsuario();
-            });
-			$("#txtPass").focusout(function(e) {
-				validarPass();
-            });
-			//Pongo en blanco los campos cuando empiezo a escribir
-			$("input").keydown(function(){
-				$(this).attr("style","background:#FFF");
-			})
-			
-        });//Document Ready
+});//Document Ready
 		
 	function validarUsuario(){
 		//Limpio mensaje de error y pongo en blanco el campo

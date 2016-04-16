@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page import="entidades.Persona"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -13,15 +14,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Inicio</a></li>
-            <li><a href="#about">About</a></li>
+            <li id="liIndex"><a href="index.jsp">Inicio</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <%
-          	String nombreUsuario = (String) session.getAttribute("nombreUsuario");
-          	if(nombreUsuario==null){
+          	Persona p = (Persona) session.getAttribute("usuario");
+          	if(p==null){
           %>
-          	<li><a href="iniciarSesion.jsp">Iniciar sesión</a></li>
+          	<li id="liIniciarSesion"><a href="iniciarSesion.jsp">Iniciar sesiÃ³n</a></li>
+          <%} else {%>
+          	<li id="liCerrarSesion"><a href="CerrarSesion">Cerrar Sesion</a></li>
           <%}%>
           </ul>
         </div><!--/.nav-collapse -->
