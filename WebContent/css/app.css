@@ -23,3 +23,8 @@ nav.navbar ul.nav a{
 #navbar li.dropdown ul.dropdown-menu {
 	background:#00D3ED;
 }
+
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
