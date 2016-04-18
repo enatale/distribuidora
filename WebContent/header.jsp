@@ -15,6 +15,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li id="liIndex"><a href="index.jsp">Inicio</a></li>
+            <li id="liProductos"><a href="Productos">Productos</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <%

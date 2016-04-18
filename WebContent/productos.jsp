@@ -1,17 +1,30 @@
 <%@page import="entidades.Producto"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distribuidora Remar</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#liProductos").addClass("active");
+    	});
+    </script>
+  </head>
+
+<%@ include file="header.jsp" %>
 <% ArrayList<Producto> productos = new ArrayList<Producto>(); 
-	productos=(ArrayList<Producto>) request.getParameter("Producto");
-	Producto pr; %>
+	productos=(ArrayList<Producto>) request.getAttribute("productos");
+	//Producto pr; %>
 <div class="container">           
   <table class="table table-hover">
     <thead>
@@ -22,15 +35,15 @@
       </tr>
     </thead>
     <tbody>
-    <% for(int i=0;i<= productos.size();i++){
-    	pr = new Producto();
-    	pr= productos.get(i);
-    
+    <% 
+	    for (Producto pr : productos) {
+    	/*for(int i=0;i< productos.size();i++){
+    	pr= productos.get(i+1);*/
     %>
       <tr>
-        <td><%= pr.getCodProducto() %></td>
-        <td><%= pr.getDescripcion() %></td>
-        <td><%= pr.getStock() %></td>
+        <td><%=pr.getCodProducto() %></td>
+        <td><%=pr.getDescripcion() %></td>
+        <td><%=pr.getStock() %></td>
       </tr> 
       <% } %>
     </tbody>

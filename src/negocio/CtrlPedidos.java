@@ -10,6 +10,6 @@ public class CtrlPedidos {
 	dataPedidos dp;
 
 	public ArrayList<Producto> getAll() throws ClassNotFoundException{
-		return dp.getAll();
+		return new dataPedidos().getAll();
 	}
 }

@@ -26,7 +26,8 @@ public class dataPedidos {
 			}
 			
 		} catch (SQLException e){
-			
+			//TODO excepcion
+			e.printStackTrace();			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();

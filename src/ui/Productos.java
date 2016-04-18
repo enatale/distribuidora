@@ -33,6 +33,7 @@ public class Productos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
@@ -48,7 +49,8 @@ public class Productos extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getSession().setAttribute("productos", prod);
+		request.setAttribute("productos", prod);
+		request.getRequestDispatcher("productos.jsp").forward(request, response);
 	}
 
 }
