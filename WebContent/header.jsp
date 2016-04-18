@@ -1,6 +1,8 @@
+<%@page import="entidades.Cliente"%>
 <%@page import="entidades.Persona"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%Persona p = (Persona) session.getAttribute("usuario"); %>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -16,10 +18,12 @@
           <ul class="nav navbar-nav">
             <li id="liIndex"><a href="index.jsp">Inicio</a></li>
             <li id="liProductos"><a href="Productos">Productos</a></li>
+          <%if(p!=null&&p instanceof Cliente){ %>
+            <li id="liPedido"><a href="pedido.jsp">Realizar pedido</a></li>	
+          <%} %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <%
-          	Persona p = (Persona) session.getAttribute("usuario");
           	if(p==null){
           %>
           	<li id="liIniciarSesion"><a href="iniciarSesion.jsp">Iniciar sesión</a></li>

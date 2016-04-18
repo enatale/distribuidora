@@ -9,32 +9,41 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import appExceptions.ApplicationException;
 import entidades.Producto;
 import negocio.CtrlPedidos;
 
-
 /**
- * Servlet implementation class Productos
+ * Servlet implementation class ajaxBusquedaDesc
  */
-@WebServlet("/Productos")
-public class Productos extends HttpServlet {
+@WebServlet(asyncSupported = true, description = "Codigo para realizar busqueda parcial de producto y devolverlo por ajax", urlPatterns = { "/ajaxBusquedaDesc" })
+public class ajaxBusquedaDesc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public Productos() {
+    public ajaxBusquedaDesc() {
+        super();
         // TODO Auto-generated constructor stub
-    	//super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request, response);
+		String descripcion = request.getParameter("descripcion");
+		ArrayList<Producto> productos;
+		try {
+			productos = new CtrlPedidos().getByDescripcion(descripcion);
+			response.getWriter().write(new Gson().toJson(productos));
+		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -42,16 +51,7 @@ public class Productos extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		CtrlPedidos db = new CtrlPedidos();
-		ArrayList<Producto> prod = new ArrayList<Producto>();
-		try {
-			prod=db.getAll();
-		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		request.setAttribute("productos", prod);
-		request.getRequestDispatcher("productos.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }

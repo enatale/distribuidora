@@ -26,7 +26,11 @@ public class CtrlPedidos {
 		return p;
 	}
 
-	public ArrayList<Producto> getAll() throws ClassNotFoundException{
+	public ArrayList<Producto> getAll() throws ApplicationException{
 		return dped.getAll();
+	}
+
+	public ArrayList<Producto> getByDescripcion(String descripcion) throws ApplicationException {
+		return dped.getByDescripcion(descripcion);
 	}
 }
