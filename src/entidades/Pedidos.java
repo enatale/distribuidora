@@ -9,12 +9,12 @@ public class Pedidos {
 	private Date fecha_cancelacion;
 	private Persona cliente;
 	private Estado_pedido estado;
-	private Linea_pedido [] lineas;
+	private ArrayList<Linea_pedido> lineas;
 	
-	public Linea_pedido[] getLineas() {
+	public ArrayList<Linea_pedido> getLineas() {
 		return lineas;
 	}
-	public void setLineas(Linea_pedido[] lineas) {
+	public void setLineas(ArrayList<Linea_pedido> lineas) {
 		this.lineas = lineas;
 	} 
 	
