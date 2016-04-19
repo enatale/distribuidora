@@ -9,7 +9,7 @@ public class CtrlPedidos {
 	
 	dataPedidos dp;
 
-	public ArrayList<Producto> getAll() throws ClassNotFoundException{
-		return new dataPedidos().getAll();
+	public ArrayList<Producto> getAll(int desde, int hasta) throws ClassNotFoundException{
+		return new dataPedidos().getAll(desde, hasta);
 	}
 }

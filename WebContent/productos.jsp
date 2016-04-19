@@ -2,6 +2,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+   <%
+   
+    Integer limit = (Integer)request.getAttribute("limitHasta");
+    request.setAttribute("limit", limit);
+   %>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -41,12 +46,17 @@
     	pr= productos.get(i+1);*/
     %>
       <tr>
+        <td><%=limit %></td>
         <td><%=pr.getCodProducto() %></td>
         <td><%=pr.getDescripcion() %></td>
-        <td><%=pr.getStock() %></td>
+        <td><%=pr.getImporte() %></td>
       </tr> 
       <% } %>
     </tbody>
+     <form action="Productos" method="post">
+      <input name="siguiente" type="submit" value="Siguiente" type="btn" >
+    
+     </form>
   </table>
 </div>
 
