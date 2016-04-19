@@ -32,7 +32,7 @@ $(document).ready(function() {
 		var usuario = $("#txtUsuario").val();
 		if(usuario==""){
 			//Si el campo esta vacio muestro el mensaje y pongo el campo en rojo
-			$("#txtUsuario").attr("style","background:#FF0000");
+			$("#txtUsuario").attr("style","background:#f2dede");
 			$("#errorUsuario").html("El nombre de usuario no puede estar en blanco");
 			return false;
 		} else return true;
@@ -42,7 +42,7 @@ $(document).ready(function() {
 		$("#txtPass").attr("style","background:#FFF");	
 		var cont = $("#txtPass").val();
 		if(cont==""){
-			$("#txtPass").attr("style","background:#FF0000");
+			$("#txtPass").attr("style","background:#f2dede");
 			$("#errorPass").html("La contraseña no puede estar en blanco");
 			return false;
 		} else return true;
