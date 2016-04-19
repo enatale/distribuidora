@@ -1,11 +1,14 @@
 package entidades;
 
+import java.util.Date;
+
 public class Producto {
 
 	private int codProducto;
 	private String descripcion;
 	private int stock;
 	private float importe;
+	private Date fecha;
 	
 	public int getCodProducto() {
 		return codProducto;
@@ -30,6 +33,12 @@ public class Producto {
 	}
 	public void setImporte(float importe) {
 		this.importe = importe;
+	}
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 	
 	

@@ -27,7 +27,7 @@ public class CtrlPedidos {
 	}
 
 
-	public ArrayList<Producto> getAll(int desde, int hasta) throws ClassNotFoundException{
+	public ArrayList<Producto> getAll(int desde, int hasta) throws ApplicationException{
 		return new dataPedidos().getAll(desde, hasta);
 	}
 }

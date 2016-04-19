@@ -5,10 +5,12 @@ import entidades.Producto;
 import java.sql.*;
 import java.util.ArrayList;
 
+import appExceptions.ApplicationException;
+
 public class dataPedidos {
 
 	
-	public  ArrayList<Producto> getAll(int desde, int hasta) throws ClassNotFoundException{
+	public  ArrayList<Producto> getAll(int desde, int hasta) throws ApplicationException{
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		Producto prod;
 		ResultSet rs= null;
@@ -16,7 +18,6 @@ public class dataPedidos {
 		//PreparedStatement stmtValores =null;
 		PreparedStatement stmt = null;
 		try{
-			FactoryConexion.getInstancia().getConnection().setAutoCommit(false);
 			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(
 					"select productos.codProducto,productos.descripcion,productos.stock,precios.importe "
 					+ "from productos "
@@ -49,7 +50,7 @@ public class dataPedidos {
 				if(rs!=null) rs.close();
 				FactoryConexion.getInstancia().getConnection().close();
 			} catch (SQLException e) {
-				//throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
 			}
 		}
 		return productos;

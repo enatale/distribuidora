@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import entidades.Producto;
 import negocio.CtrlPedidos;
 
+import appExceptions.ApplicationException;
 
 /**
  * Servlet implementation class Productos
@@ -56,7 +57,7 @@ public class Productos extends HttpServlet {
 				
 			    limitHasta=limitDesde+cant_por_pagina;
 				prod=db.getAll(limitDesde,limitHasta);
-			} catch (ClassNotFoundException e) {
+			} catch (ApplicationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
