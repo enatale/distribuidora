@@ -39,6 +39,7 @@ public class AltaProducto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
@@ -84,7 +85,7 @@ public class AltaProducto extends HttpServlet {
 				producto = new CtrlProducto();
 				try {
 					producto.agregarProducto(pr);
-				    request.setAttribute("mensaje", "El producto fue agregado con exito");
+				    request.setAttribute("mensajeConfirmacion", "El producto fue agregado con exito");
 				    request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
 				} catch (ApplicationException e) {
 					request.setAttribute("mensaje", e.getMessage());

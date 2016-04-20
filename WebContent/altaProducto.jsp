@@ -42,7 +42,6 @@
             <% 
       			String mensaje=(String)request.getAttribute("mensaje");
         		if(mensaje!=null){
-        			//CAMBIAR EL AGREGADO CON EXITO. ABAJO Y EL CAMPO DE LA FECHA YYYY-MM-DD
       		%>
       		
       			<div class="alert alert-danger" role="alert">
@@ -50,7 +49,15 @@
       			</div>
       		<%
         		}
+      			String mensajeConfirmacion = (String)request.getAttribute("mensajeConfirmacion");
+      			if(mensajeConfirmacion!=null){
       		%>
+      			<div class="alert alert-success">
+					  <a href="#" class="alert-link"><%=mensajeConfirmacion %></a>
+				</div>
+			<%
+      			}
+			%>
         </div>
     </div> 
 	</div><!-- /container -->
