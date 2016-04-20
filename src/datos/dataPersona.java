@@ -3,7 +3,6 @@ package datos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import appExceptions.ApplicationException;
 import entidades.Cliente;
@@ -46,7 +45,6 @@ public class dataPersona {
 						Estado_cliente ec = new Estado_cliente(rsEstado.getInt("id_estado_cliente"),rsEstado.getString("descripcion_estado"));
 						c.setEstado(ec);
 					}
-					//TODO VER ESTADO DEL CLIENTE LANZAR EXCEPCION CUANDO ES PENDIENTE
 					
 					p=c;
 				} else {

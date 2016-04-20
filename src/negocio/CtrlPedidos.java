@@ -11,11 +11,11 @@ import entidades.Producto;
 public class CtrlPedidos {
 	
 	dataPersona dper;
-	dataPedidos dped;
+	dataProducto dprod;
 	
 	public CtrlPedidos(){
 		dper = new dataPersona();
-		dped = new dataPedidos();
+		dprod = new dataProducto();
 	}
 	
 	public Persona identificarPersona(String usuario, String contraseña) throws ApplicationException {
@@ -26,8 +26,15 @@ public class CtrlPedidos {
 		return p;
 	}
 
-
 	public ArrayList<Producto> getAll(int desde, int hasta) throws ApplicationException{
-		return new dataPedidos().getAll(desde, hasta);
+		return dprod.getAll(desde, hasta);
+	}
+
+	public int getCantProductos() throws ApplicationException {
+		return dprod.getCantProductos();
+	}
+
+	public ArrayList<Producto> getByDescripcion(String descripcion) throws ApplicationException {
+		return dprod.getByDescripcion(descripcion);
 	}
 }

@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import appExceptions.ApplicationException;
 import entidades.Producto;
 import negocio.CtrlPedidos;
-
-import appExceptions.ApplicationException;
 
 /**
  * Servlet implementation class Productos
@@ -33,37 +32,43 @@ public class Productos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request, response);
+		int inicio,pagina,totalProductos,totalPaginas;
+		CtrlPedidos ctrl = new CtrlPedidos();
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+		
+		int cant_por_pagina=2;
+		if(request.getParameter("pagina")!=null){
+			pagina = Integer.parseInt(request.getParameter("pagina"));
+		} else pagina=0;
+		
+		if(pagina==0){
+			inicio=0;
+			pagina=1;
+		} else{
+			inicio = (pagina-1)*cant_por_pagina;
+		}
+		try {
+			totalProductos= ctrl.getCantProductos();
+			totalPaginas=  (int) Math.ceil((float)totalProductos/(float)cant_por_pagina);
+			productos=ctrl.getAll(inicio, cant_por_pagina);
+			request.setAttribute("totalProductos", totalProductos);
+			request.setAttribute("totalPaginas", totalPaginas);
+			request.setAttribute("productos", productos);
+			request.setAttribute("pagina", pagina);
+			request.getRequestDispatcher("productos.jsp").forward(request, response);
+			
+		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-			int cant_por_pagina = 1;
-			int limitDesde=0,limitHasta=0;
-			CtrlPedidos db = new CtrlPedidos();
-			ArrayList<Producto> prod = new ArrayList<Producto>();
-			
-			try {
-				
-			    String limit =(String)request.getAttribute(("limit"));
-			    // como recuperar el valor de la request 
-				if (limit==null||limit=="") limit="0";
-				else {limit+=cant_por_pagina;} 
-			    limitDesde=Integer.parseInt(limit);
-				
-			    limitHasta=limitDesde+cant_por_pagina;
-				prod=db.getAll(limitDesde,limitHasta);
-			} catch (ApplicationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.setAttribute("limitHasta", limitHasta);
-			request.setAttribute("productos", prod);
-		request.getRequestDispatcher("productos.jsp").forward(request, response);
+		doGet(request, response);			
+
 	}
 
 }

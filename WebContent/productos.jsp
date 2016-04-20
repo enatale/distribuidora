@@ -27,9 +27,16 @@
   </head>
 
 <%@ include file="header.jsp" %>
-<% ArrayList<Producto> productos = new ArrayList<Producto>(); 
+<% 	ArrayList<Producto> productos; 
 	productos=(ArrayList<Producto>) request.getAttribute("productos");
-	//Producto pr; %>
+	Integer totalPaginas=(Integer)request.getAttribute("totalPaginas");
+	Integer totalProductos=(Integer)request.getAttribute("totalProductos");
+	Integer pagina = (Integer)request.getAttribute("pagina");
+	%>
+<div class="row" style="text-align: center">
+<h1>Lista de Precios</h1>
+</div>
+<div class="row">
 <div class="container">           
   <table class="table table-hover">
     <thead>
@@ -46,18 +53,30 @@
     	pr= productos.get(i+1);*/
     %>
       <tr>
-        <td><%=limit %></td>
         <td><%=pr.getCodProducto() %></td>
         <td><%=pr.getDescripcion() %></td>
         <td><%=pr.getImporte() %></td>
       </tr> 
       <% } %>
     </tbody>
-     <form action="Productos" method="post">
-      <input name="siguiente" type="submit" value="Siguiente" type="btn" >
-    
-     </form>
   </table>
+</div>
+</div>
+<div class="row" style="text-align: center;">
+	<h1>
+<%if(totalPaginas>1){
+	for(int i=1;i<=totalPaginas;i++){
+		if(i==pagina){%>
+		<span class="label label-primary"><%=Integer.toString(pagina)%></span>
+		<%
+		} else{
+			%>
+			<a class="btn btn-default" href="Productos?pagina=<%=i%>"><%=i%></a>
+			<%
+		}
+	}
+}
+%></h1>
 </div>
 
 </body>

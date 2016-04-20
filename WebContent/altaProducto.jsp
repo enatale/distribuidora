@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Distribuidora Remar</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet"  href="css/bootstrap-theme.css" />
-<link rel="stylesheet"  href="css/app.css"/>
-<script source="js/bootstrap.js"type="text/javascript"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distribuidora Remar</title>
 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/jquery-1.12.3.min.js"></script>
+  </head>
 </head>
 <body>
-  <%@ include file="inicioEmp.jsp" %>
+  <%@ include file="headerEmp.jsp" %>
   
       <div class="container theme-showcase" role="main">
     	<div class="row">
@@ -60,5 +61,6 @@
         </div>
     </div> 
 	</div><!-- /container -->
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
