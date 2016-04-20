@@ -21,10 +21,8 @@
   	
   
     <%@ include file="header.jsp" %>
-    <%ArrayList<Producto> productos = new CtrlPedidos().getAll(); %>
     
     <h1 style="text-align:center">Realice su pedido</h1>
-    
     <div class="container">
     <div class="row" style="height:100%">
     	<div class="col-sm-6">
@@ -55,19 +53,11 @@
 					</tr>
 				</thead>
 				<tbody id="cuerpo">
-				<% int nro=0;
-					for(Producto prod:productos){
-						nro++;
-						%>
-					
-					<tr id="<%=nro%>">
-						<td id="cod<%=nro%>"+><%=prod.getCodProducto()%></td>
-						<td id="desc<%=nro%>"><%=prod.getDescripcion()%></td>
-						<td><%=prod.getImporte()%></td>
+					<tr>
+						<td colspan="3"><h2>Comienze a escribir para obtener los productos</h2></td>
 					</tr>
-				<%} %>
 				</tbody>
-			</table>	      
+			</table>      
 		</div>
 	</div> 
 	</div><!-- /container -->

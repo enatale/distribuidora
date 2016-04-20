@@ -34,10 +34,15 @@ public class ajaxBusquedaDesc extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int inicio,pagina,totalProductos,totalPaginas;
+		CtrlPedidos ctrl = new CtrlPedidos();
+		//TODO aumentar cant_por_pagima
+		int cant_por_pagina=2;
+		inicio=0;
 		String descripcion = request.getParameter("descripcion");
 		ArrayList<Producto> productos;
 		try {
-			productos = new CtrlPedidos().getByDescripcion(descripcion);
+			productos = ctrl.getByDescripcion(descripcion,inicio,cant_por_pagina);
 			response.getWriter().write(new Gson().toJson(productos));
 		} catch (ApplicationException e) {
 			// TODO Auto-generated catch block

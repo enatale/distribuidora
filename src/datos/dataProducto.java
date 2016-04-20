@@ -13,14 +13,14 @@ public class dataProducto {
 	
 	public  int getCantProductos() throws ApplicationException{
 		
-		int cantPedidos=0;
+		int cantProductos=0;
 		ResultSet rs= null;
 		Statement stmt = null;
 		try{
 			stmt= FactoryConexion.getInstancia().getConnection().createStatement();
 			rs=stmt.executeQuery("select count(codProducto) 'cantidad' from productos");
 			while(rs.next()){
-				cantPedidos=rs.getInt("cantidad");
+				cantProductos=rs.getInt("cantidad");
 			}
 			
 		} catch (SQLException e){
@@ -35,17 +35,17 @@ public class dataProducto {
 				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
 			}
 		}
-		return cantPedidos;
+		return cantProductos;
 		
 		
 	}
+	
+	
 	
 	public  ArrayList<Producto> getAll(int desde, int hasta) throws ApplicationException{
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		Producto prod;
 		ResultSet rs= null;
-		//ResultSet rsValores=null;
-		//PreparedStatement stmtValores =null;
 		PreparedStatement stmt = null;
 		try{
 			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(
@@ -59,6 +59,7 @@ public class dataProducto {
 					+ "	group by precios.codProducto)val_prod "
 					+ "on precios.codProducto=val_prod.codProducto and precios.fecha_desde=val_prod.fecha_desde "
 					+ "group by productos.codproducto"
+					+ " order by productos.descripcion"
 					+ " limit ?,?");
 			stmt.setInt(1, desde);
 			stmt.setInt(2, hasta);
@@ -87,23 +88,35 @@ public class dataProducto {
 		
 		
 	}
-	public ArrayList<Producto> getByDescripcion(String descripcion) throws ApplicationException {
-		//TODO cambiar cuando cacho suba lo suyo para tener el importe
+	public ArrayList<Producto> getByDescripcion(String descripcion,int desde, int hasta) throws ApplicationException {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		Producto prod;
 		ResultSet rs= null;
-		PreparedStatement stmt =null;
+		PreparedStatement stmt = null;
 		try{
-			stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
-					"select * from productos where descripcion like ?");
+			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select productos.codProducto,productos.descripcion,productos.stock,precios.importe "
+					+ "from productos "
+					+ "inner join precios "
+					+ "on precios.codProducto=productos.codProducto "
+					+ "inner join (select precios.codProducto, max(precios.fecha_desde) 'fecha_desde'"
+					+ "	from precios"
+					+ "	where precios.fecha_desde <= current_date()"
+					+ "	group by precios.codProducto)val_prod "
+					+ "on precios.codProducto=val_prod.codProducto and precios.fecha_desde=val_prod.fecha_desde "
+					+ "where productos.descripcion like ?"
+					+ "group by productos.codproducto"
+					+ " order by productos.descripcion"
+					+ " limit ?,?");
 			stmt.setString(1, "%"+descripcion+"%");
+			stmt.setInt(2, desde);
+			stmt.setInt(3, hasta);
 			rs=stmt.executeQuery();
 			while(rs.next()){
 				prod = new Producto();
 				prod.setCodProducto(rs.getInt("codProducto"));
 				prod.setDescripcion(rs.getString("descripcion"));
-				prod.setStock(rs.getInt("stock"));
-				prod.setImporte(50);
+				prod.setImporte(rs.getFloat("importe"));
 				productos.add(prod);
 			}
 			
@@ -114,9 +127,9 @@ public class dataProducto {
 			try {
 				if(stmt!=null) stmt.close();
 				if(rs!=null) rs.close();
-				FactoryConexion.getInstancia().getConnection().setAutoCommit(true);
+				FactoryConexion.getInstancia().getConnection().close();
 			} catch (SQLException e) {
-				//throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
 			}
 		}
 		return productos;
@@ -157,9 +170,9 @@ public class dataProducto {
 				if(stmtPrecio!=null) stmtPrecio.close();
 				if(rs!=null) rs.close();
 				FactoryConexion.getInstancia().getConnection().close();
-			} catch (SQLException e) {
-				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
-			}
+				} catch (SQLException e) {
+					throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+				}
 				
 			}
 		

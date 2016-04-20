@@ -34,7 +34,7 @@ public class CtrlPedidos {
 		return dprod.getCantProductos();
 	}
 
-	public ArrayList<Producto> getByDescripcion(String descripcion) throws ApplicationException {
-		return dprod.getByDescripcion(descripcion);
+	public ArrayList<Producto> getByDescripcion(String descripcion,int desde,int hasta) throws ApplicationException {
+		return dprod.getByDescripcion(descripcion,desde,hasta);
 	}
 }

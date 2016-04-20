@@ -1,17 +1,18 @@
 $(document).ready(function(){
 	$("#liPedido").addClass("active");
-	$("tr").click(fila_click);
 	
 	$("#txtDescripcion").keyup(function(e) {
-        var descripcion = {descripcion:$("#txtDescripcion").val()}
-		$.post("ajaxBusquedaDesc",descripcion,llenarTabla);
+		if($("#txtDescripcion").val()==""){
+			$("#cuerpo").html('<tr><td colspan="3"><h2>Comienze a escribir para obtener los productos</h2></td></tr>');
+		} else{
+	        var descripcion = {descripcion:$("#txtDescripcion").val()}
+			$.post("ajaxBusquedaDesc",descripcion,llenarTabla);
+		}
     });
 });
 
-function llenarTabla(listado){
-	var productos = new Array();
-	productos=$.parseJSON(listado);
-	//$("#cuerpo").html(listado);
+function llenarTabla(respuesta){
+	var productos = $.parseJSON(respuesta);
 	$("#cuerpo").html("");
 	for (i=1;i<=productos.length;i++){
 		$("#cuerpo").append(

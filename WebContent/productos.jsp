@@ -49,8 +49,6 @@
     <tbody>
     <% 
 	    for (Producto pr : productos) {
-    	/*for(int i=0;i< productos.size();i++){
-    	pr= productos.get(i+1);*/
     %>
       <tr>
         <td><%=pr.getCodProducto() %></td>
