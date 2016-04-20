@@ -1,7 +1,5 @@
 package negocio;
 
-import java.util.Date;
-
 import appExceptions.ApplicationException;
 import datos.dataProducto;
 import entidades.Producto;
