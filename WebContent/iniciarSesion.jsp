@@ -16,7 +16,8 @@
   </head>
   <body>
   
-    <%@ include file="header.jsp" %>
+    <%@ include file="header.jsp"%>
+    <%//TODO sacar usuario y contra %>
 
 	
     <div class="container theme-showcase" role="main">
@@ -25,11 +26,11 @@
             <form action="iniciarSesion" method="post" id="formLogin">
                 <h1>Iniciar sesión</h1>
                 <label for="txtUsuario" class="sr-only">Nombre de usuario</label>
-                <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" placeholder="Nombre de usuario">
+                <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" placeholder="Nombre de usuario" value="cacho">
                 <label for="txtUsuario" id="errorUsuario" style="color:#FF0004"></label>
                 
                 <label for="txtPass" class="sr-only">Contraseña</label>
-                <input type="password" id="txtPass" name="txtPass" class="form-control" placeholder="Contraseña">
+                <input type="password" id="txtPass" name="txtPass" class="form-control" placeholder="Contraseña" value="cacho">
                 <label for="txtPass" id="errorPass" style="color:#FF0004"></label>
                 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>

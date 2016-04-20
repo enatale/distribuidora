@@ -37,4 +37,18 @@ public class CtrlPedidos {
 	public ArrayList<Producto> getByDescripcion(String descripcion,int desde,int hasta) throws ApplicationException {
 		return dprod.getByDescripcion(descripcion,desde,hasta);
 	}
+
+	public Producto getByCodigo(int codigo) throws ApplicationException {
+		return dprod.getByCodigo(codigo);
+	}
+
+	public boolean cantidadSuficiente(Producto producto, int cantidad) throws ApplicationException {
+		int stock=dprod.getStock(producto.getCodProducto());
+		if(stock>=cantidad){
+			dprod.descontarStock(cantidad,producto.getCodProducto());
+			return true;
+		} else{
+			return false;
+		}
+	}
 }

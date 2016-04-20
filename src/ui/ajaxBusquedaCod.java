@@ -16,16 +16,16 @@ import entidades.Producto;
 import negocio.CtrlPedidos;
 
 /**
- * Servlet implementation class ajaxBusquedaDesc
+ * Servlet implementation class ajaxBusquedaCod
  */
-@WebServlet(asyncSupported = true, description = "Codigo para realizar busqueda parcial de producto y devolverlo por ajax", urlPatterns = { "/ajaxBusquedaDesc" })
-public class ajaxBusquedaDesc extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/ajaxBusquedaCod" })
+public class ajaxBusquedaCod extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ajaxBusquedaDesc() {
+    public ajaxBusquedaCod() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,15 +34,13 @@ public class ajaxBusquedaDesc extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int inicio=0;
 		CtrlPedidos ctrl = new CtrlPedidos();
 		//TODO aumentar cant_por_pagima
-		int cant_por_pagina=2;
-		String descripcion = request.getParameter("descripcion");
-		ArrayList<Producto> productos;
+		int codigo = Integer.valueOf(request.getParameter("codigo"));
+		Producto producto;
 		try {
-			productos = ctrl.getByDescripcion(descripcion,inicio,cant_por_pagina);
-			response.getWriter().write(new Gson().toJson(productos));
+			producto = ctrl.getByCodigo(codigo);
+			response.getWriter().write(new Gson().toJson(producto));
 		} catch (ApplicationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
