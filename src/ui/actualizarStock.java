@@ -53,7 +53,7 @@ public class actualizarStock extends HttpServlet {
 			if(request.getParameter("txtCod").equals("")){
 				mensaje+= "El codigo de producto no puede estar vacio\n";
 			}
-			if(request.getParameter("txtStock").equals("")){
+			if(request.getParameter("txtCantidad").equals("")){
 				mensaje+= "La cantidad a agregar a pedir no puede estar vacia\n";
 			}
 			if(!mensaje.equals("")){
@@ -61,7 +61,7 @@ public class actualizarStock extends HttpServlet {
 			}else{
 				int codigo=Integer.valueOf(request.getParameter("txtCod"));
 				pr=ctrl.getByCodigo(codigo);	
-				total=pr.getStock()+Integer.parseInt(request.getParameter("txtStock"));
+				total=pr.getStock()+Integer.parseInt(request.getParameter("txtCantidad"));
 				pr.setStock(total);
 				ctrl.actualizarStock(pr);
 			}

@@ -38,10 +38,10 @@
                 <label for="txtCod" id="errorCod" style="color:#FF0004"></label>
                                 
                 <label for="txtCantidad" class="sr-only">Producto</label>
-                <input type="text" id="txtStock" name="txtStock" class="form-control" placeholder="Cantidad Stock">
-                <label for="txtStock" id="errorStocl" style="color:#FF0004"></label>
+                <input type="text" id="txtCantidad" name="txtCantidad" class="form-control" placeholder="Cantidad">
+                <label for="txtCantidad" id="errorCantidad" style="color:#FF0004"></label>
                 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Actualizar</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar</button>
             </form>
             <% 
       			String mensaje=(String)request.getAttribute("mensaje");
