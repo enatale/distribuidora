@@ -22,8 +22,9 @@
 				 <!-- dropdown-->
 				  <ul class="dropdown-menu" role="menu">
 				    <li><a href="altaProducto.jsp">Alta Productos</a></li>
-				    <li><a href="">Baja Productos</a></li>
+				    <li><a href="">Modificar Producto</a></li>
 				    <li><a href="">Actualizacion de Stock</a></li>
+				    <li><a href="">Actualizacion de Precio</a></li>
 				  </ul>
 			  </li>
             <li class="dropdown">

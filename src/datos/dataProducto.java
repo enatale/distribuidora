@@ -43,6 +43,7 @@ public class dataProducto {
 	
 	
 	public  ArrayList<Producto> getAll(int desde, int hasta) throws ApplicationException{
+
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		Producto prod;
 		ResultSet rs= null;
@@ -88,6 +89,8 @@ public class dataProducto {
 		
 		
 	}
+	
+	
 	public ArrayList<Producto> getByDescripcion(String descripcion,int desde, int hasta) throws ApplicationException {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		Producto prod;
@@ -179,7 +182,6 @@ public class dataProducto {
 	}
 
 
-
 	public Producto getByCodigo(int cod) throws ApplicationException {
 		Producto prod = null;
 		ResultSet rs= null;
@@ -221,7 +223,6 @@ public class dataProducto {
 	}
 
 
-
 	public int getStock(int codProducto) throws ApplicationException {
 		int stock=0;
 		ResultSet rs= null;
@@ -250,7 +251,6 @@ public class dataProducto {
 	}
 
 
-
 	public void descontarStock(int cantidad,int codProducto) throws ApplicationException {
 		PreparedStatement stmt = null;
 		try{
@@ -271,5 +271,96 @@ public class dataProducto {
 			}
 		}
 	}
+
+	
+
+	public void modificarProducto (Producto pr) throws ApplicationException{
+		PreparedStatement stmtProducto = null;
+		PreparedStatement stmtPrecio=null;
+
+		try {
+		FactoryConexion.getInstancia().getConnection().setAutoCommit(false);
+		stmtProducto = FactoryConexion.getInstancia().getConnection().prepareStatement(
+				"update productos set descripcion=?"
+				+ "where codProducto=?");
+		stmtProducto.setString(1, pr.getDescripcion());
+		stmtProducto.setInt(1, pr.getCodProducto());
+		stmtProducto.execute();
+		stmtPrecio = FactoryConexion.getInstancia().getConnection().prepareStatement(
+				"update precios set importe = ?"
+				+ "where codProducto=? and fecha_desde = ?");
+		stmtPrecio.setFloat(1, pr.getImporte());
+		stmtPrecio.setInt(2, pr.getCodProducto());
+		stmtPrecio.setDate(3, new java.sql.Date(pr.getFecha().getTime()));
+		} catch (SQLException e) {
+			try {
+				FactoryConexion.getInstancia().getConnection().rollback();
+			} catch (SQLException e1) {
+				throw new ApplicationException("Error al modificar producto de la base de datos", e);
+			}
+			throw new ApplicationException("Error al modificar producto de la base de datos", e);
+		
+		} finally {
+			try {
+				if(stmtProducto != null) stmtProducto.close();
+				if(stmtPrecio != null) stmtPrecio.close();
+				FactoryConexion.getInstancia().getConnection().setAutoCommit(true);
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al liberar recursos de la base de datos", e);
+			}
+		}
+		
+	}
+
+	
+	public void ActualizarPrecio (Producto pr) throws ApplicationException{
+
+		PreparedStatement stmt=null;
+		
+		try {
+			stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"insert into precios (codProducto, fecha_desde, importe"
+					+" values (?,?,?)");
+			stmt.setInt(1,pr.getCodProducto());
+			stmt.setDate(2,new java.sql.Date(pr.getFecha().getTime()));
+			stmt.setFloat(3, pr.getImporte());
+		} catch (SQLException e) {
+			throw new ApplicationException("Error al agregar nuevo precio del producto de la base de datos", e);
+		
+		} finally{
+			try {
+				if(stmt != null) stmt.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al liberar recursos de la base de datos", e);
+			}
+			
+		}
+	}
+
+	public void ActualizarStock (Producto pr)throws ApplicationException{
+		PreparedStatement stmt =null;
+		
+		try {
+			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"update precios set stock=?"
+					+ "where codProducto=?");
+
+			stmt.setInt(1, pr.getStock());
+			stmt.setInt(2, pr.getCodProducto());
+		} catch (SQLException e) {
+			throw new ApplicationException("Error al actualizar el stock del producto de la base de datos", e);
+		} finally{
+			try {
+				if(stmt != null) stmt.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al liberar recursos de la base de datos", e);
+			}
+		}
+	}
+
 }
+
 		
