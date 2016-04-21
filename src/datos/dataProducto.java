@@ -362,7 +362,6 @@ public class dataProducto {
 	}
 
 
-/*
 
 	public void aumentarStock(int codProducto, int cantidad) throws ApplicationException {
 		PreparedStatement stmt = null;
@@ -384,7 +383,6 @@ public class dataProducto {
 			}
 		}
 	}
-*/
 }
 
 		
