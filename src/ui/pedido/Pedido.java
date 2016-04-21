@@ -84,11 +84,26 @@ public class Pedido extends HttpServlet {
 			else {
 				throw new ApplicationException("Para hacer un pedido debe iniciar sesión como cliente", null);
 			}
+		}  catch (NumberFormatException e) {
+			String msj="";
+			if(!esEntero(request.getParameter("txtCod"))) msj+="El código de producto debe ser un número entero. \n";
+			if(!esEntero(request.getParameter("txtCantidad"))) msj+="La cantidad debe ser un número entero. \n";
+			request.setAttribute("mensaje", msj);
+			request.getRequestDispatcher("pedido.jsp").forward(request, response);
 		} catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
 			request.getRequestDispatcher("pedido.jsp").forward(request, response);
 		}
 		
+	}
+	
+	private boolean esEntero(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException e2) {
+			return false;
+		}
 	}
 
 	/**

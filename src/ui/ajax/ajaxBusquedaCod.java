@@ -35,7 +35,6 @@ public class ajaxBusquedaCod extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CtrlPedidos ctrl = new CtrlPedidos();
-		//TODO aumentar cant_por_pagima
 		int codigo = Integer.valueOf(request.getParameter("codigo"));
 		Producto producto;
 		try {

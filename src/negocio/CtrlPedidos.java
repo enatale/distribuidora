@@ -46,12 +46,16 @@ public class CtrlPedidos {
 	}
 
 	public boolean cantidadSuficiente(Producto producto, int cantidad) throws ApplicationException {
-		int stock=dprod.getStock(producto.getCodProducto());
-		if(stock>=cantidad){
-			dprod.descontarStock(cantidad,producto.getCodProducto());
-			return true;
-		} else{
-			return false;
+		try{
+			int stock=dprod.getStock(producto.getCodProducto());
+			if(stock>=cantidad){
+				dprod.descontarStock(cantidad,producto.getCodProducto());
+				return true;
+			} else{
+				return false;
+			}
+		} catch(NullPointerException e) {
+			throw new ApplicationException("No se encontró producto con el código ingresado", e.getCause());
 		}
 	}
 
