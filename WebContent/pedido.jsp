@@ -104,7 +104,7 @@
                 <td><%=item.getProducto().getImporte() %></td>
                 <td><%=item.getCantidad() %></td>
                 <td><%=subtotal %></td>
-                <td><a class="btn btn-danger" href="borrarLinea?nro=<%=i %>">X</a></td>
+                <td><a class="btn btn-danger" href="pedido/borrarLinea?nro=<%=i %>">X</a></td>
               </tr>
             <%	i++;
             	total+=subtotal;
@@ -117,8 +117,8 @@
           </table>
 	</div>
 	<div class="row" style="float: right;">
-		<a class="btn btn-danger" href="#">BORRAR PEDIDO</a>
-		<a class="btn btn-primary btn-lg" href="#">CONFIRMAR PEDIDO</a>
+		<a class="btn btn-danger" href="pedido/borrarPedido">BORRAR PEDIDO</a>
+		<a class="btn btn-primary btn-lg" href="pedido/confirmarPedido">CONFIRMAR PEDIDO</a>
 	</div>
 	<%} %>
 	</div><!-- /container -->

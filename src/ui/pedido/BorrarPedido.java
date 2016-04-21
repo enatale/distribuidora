@@ -1,31 +1,28 @@
-package ui;
+package ui.pedido;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import appExceptions.ApplicationException;
-import entidades.Producto;
+import entidades.Linea_pedido;
+import entidades.Pedidos;
 import negocio.CtrlPedidos;
 
 /**
- * Servlet implementation class ajaxBusquedaCod
+ * Servlet implementation class BorrarPedido
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/ajaxBusquedaCod" })
-public class ajaxBusquedaCod extends HttpServlet {
+@WebServlet("/pedido/borrarPedido")
+public class BorrarPedido extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ajaxBusquedaCod() {
+    public BorrarPedido() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +31,17 @@ public class ajaxBusquedaCod extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CtrlPedidos ctrl = new CtrlPedidos();
-		//TODO aumentar cant_por_pagima
-		int codigo = Integer.valueOf(request.getParameter("codigo"));
-		Producto producto;
 		try {
-			producto = ctrl.getByCodigo(codigo);
-			response.getWriter().write(new Gson().toJson(producto));
+			CtrlPedidos ctrl= new CtrlPedidos();
+			Pedidos pedido = (Pedidos) request.getSession().getAttribute("pedido");
+			for (Linea_pedido lp : pedido.getLineas()) {
+				ctrl.aumentarStock(lp.getProducto(),lp.getCantidad());
+			}
+			request.getSession().removeAttribute("pedido");
+			response.sendRedirect("../pedido.jsp");
 		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("mensaje", e.getMessage());
+			request.getRequestDispatcher("../pedido.jsp").forward(request, response);
 		}
 	}
 

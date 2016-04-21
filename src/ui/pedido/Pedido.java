@@ -1,4 +1,4 @@
-package ui;
+package ui.pedido;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import appExceptions.ApplicationException;
 import entidades.Cliente;
-import entidades.Estado_cliente;
 import entidades.Estado_pedido;
 import entidades.Linea_pedido;
 import entidades.Pedidos;
@@ -76,7 +75,7 @@ public class Pedido extends HttpServlet {
 						items.add(new Linea_pedido(producto,cantidad));
 						pedido.setLineas(items);
 						request.getSession().setAttribute("pedido", pedido);
-						request.getRequestDispatcher("pedido.jsp").forward(request, response);
+						response.sendRedirect("pedido.jsp");
 					} else{
 						throw new ApplicationException("No hay stock suficiente para esa cantidad", null);
 					}

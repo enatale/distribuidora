@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import appExceptions.ApplicationException;
 import datos.*;
 import entidades.Cliente;
+import entidades.Pedidos;
 import entidades.Persona;
 import entidades.Producto;
 
@@ -12,10 +13,12 @@ public class CtrlPedidos {
 	
 	dataPersona dper;
 	dataProducto dprod;
+	dataPedidos dped;
 	
 	public CtrlPedidos(){
 		dper = new dataPersona();
 		dprod = new dataProducto();
+		dped = new dataPedidos();
 	}
 	
 	public Persona identificarPersona(String usuario, String contraseña) throws ApplicationException {
@@ -50,5 +53,14 @@ public class CtrlPedidos {
 		} else{
 			return false;
 		}
+	}
+
+	public void aumentarStock(Producto producto, int cantidad) throws ApplicationException {
+		dprod.aumentarStock(producto.getCodProducto(),cantidad);
+		
+	}
+
+	public void confirmarPedido(Pedidos pedido, Cliente cliente) throws ApplicationException {
+		dped.registrarPedido(pedido,cliente.getDni());
 	}
 }
