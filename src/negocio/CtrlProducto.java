@@ -17,4 +17,17 @@ public class CtrlProducto {
 		dprod.agregarProducto(pr);
 	}
 
+	public Producto getByCodigo(int codigo) throws ApplicationException{
+		return dprod.getByCodigo(codigo);
+	}
+	public void actualizarStock(Producto pr) throws ApplicationException{
+		dprod.ActualizarStock(pr);
+	}
+	
+	public void actualizarPrecio(Producto pr) throws ApplicationException{
+		dprod.ActualizarPrecio(pr);
+	}
+	public void modificarProducto(Producto pr) throws ApplicationException{
+		dprod.modificarProducto(pr);
+	}
 }
