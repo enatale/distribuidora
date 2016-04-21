@@ -272,7 +272,7 @@ public class dataProducto {
 		}
 	}
 
-	
+
 
 	public void modificarProducto (Producto pr) throws ApplicationException{
 		PreparedStatement stmtProducto = null;
@@ -361,6 +361,30 @@ public class dataProducto {
 		}
 	}
 
+
+/*
+
+	public void aumentarStock(int codProducto, int cantidad) throws ApplicationException {
+		PreparedStatement stmt = null;
+		try{
+			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(""
+					+ "update productos set stock=stock+? where codProducto=?");
+			stmt.setInt(1, cantidad);
+			stmt.setInt(2, codProducto);
+			stmt.execute();			
+		} catch (SQLException e){
+			//TODO excepcion
+			e.printStackTrace();			
+		} finally{
+			try {
+				if(stmt!=null) stmt.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+		}
+	}
+*/
 }
 
 		

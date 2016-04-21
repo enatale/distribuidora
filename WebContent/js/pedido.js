@@ -44,29 +44,37 @@ $(document).ready(function(){
 function mostrarProducto(respuesta){
 	var producto = $.parseJSON(respuesta);
 	$("#cuerpo").html("");
-	$("#cuerpo").append(
-		"<tr id='1'>"+
-			"<td id='cod1'>"+producto.codProducto+"</td>"+
-			"<td id='desc1'>"+producto.descripcion+"</td>"+
-			"<td>"+producto.importe+"</td>"+
-		"</tr>"
-	);
-	$("tr").click(fila_click);
+	if(producto==null){
+		$("#cuerpo").html('<tr><td colspan="3"><h2>No se encontró producto con el código ingresado.</h2></td></tr>');
+	} else{
+		$("#cuerpo").append(
+			"<tr id='1'>"+
+				"<td id='cod1'>"+producto.codProducto+"</td>"+
+				"<td id='desc1'>"+producto.descripcion+"</td>"+
+				"<td>"+producto.importe+"</td>"+
+			"</tr>"
+		);
+		$("tr").click(fila_click);
+	}
 }
 
 function llenarTabla(respuesta){
 	var productos = $.parseJSON(respuesta);
 	$("#cuerpo").html("");
-	for (i=1;i<=productos.length;i++){
-		$("#cuerpo").append(
-			"<tr id='"+i+"'>"+
-				"<td id='cod"+i+"'>"+productos[i-1].codProducto+"</td>"+
-				"<td id='desc"+i+"'>"+productos[i-1].descripcion+"</td>"+
-				"<td>"+productos[i-1].importe+"</td>"+
-			"</tr>"
-		);
+	if(productos.length==0){
+		$("#cuerpo").html('<tr><td colspan="3"><h2>No se encontraron productos que coincidan con la descripción.</h2></td></tr>');
+	}else {
+		for (i=1;i<=productos.length;i++){
+			$("#cuerpo").append(
+				"<tr id='"+i+"'>"+
+					"<td id='cod"+i+"'>"+productos[i-1].codProducto+"</td>"+
+					"<td id='desc"+i+"'>"+productos[i-1].descripcion+"</td>"+
+					"<td>"+productos[i-1].importe+"</td>"+
+				"</tr>"
+			);
+		}
+		$("tr").click(fila_click);
 	}
-	$("tr").click(fila_click);
 }
 
 function fila_click(){
