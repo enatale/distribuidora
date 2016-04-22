@@ -1,8 +1,4 @@
-<%@page import="entidades.Linea_pedido"%>
-<%@page import="entidades.Pedidos"%>
-<%@page import="negocio.CtrlPedidos"%>
 <%@page import="entidades.Producto"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -17,18 +13,18 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery-1.12.3.min.js"></script>
-    <script src="js/pedido.js"></script>
+    <script src="js/actuaStock.js"></script>
   </head>
   <body>
   	
   
-    <%@ include file="header.jsp" %>
+    <%@ include file="headerEmp.jsp" %>
     
     <h1 style="text-align:center">Realice su pedido</h1>
     <div class="container">
     <div class="row" style="height:100%">
     	<div class="col-sm-6">
-        	<form action="pedido" method="post" id="formItem">
+        	<form action="actualizarStock" method="post" id="formItem">
                 <label for="txtDescripcion" class="sr-only">Producto</label>
                 <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" placeholder="Descripción">
                 <label for="txtDescripcion" id="errorDescripcion" style="color:#FF0004"></label>
@@ -52,7 +48,15 @@
       			</div>
       		<%
         		}
+      			String mensajeConfirmacion = (String)request.getAttribute("mensajeConfirmacion");
+      			if(mensajeConfirmacion!=null){
       		%>
+      			<div class="alert alert-success">
+					  <a href="#" class="alert-link"><%=mensajeConfirmacion %></a>
+				</div>
+			<%
+      			}
+			%>
         </div>
         <div class="col-sm-6">
 			<table class="table table-hover">
@@ -60,7 +64,6 @@
 					<tr>
 						<th>Código</th>
 						<th>Descripcion</th>
-						<th>Precio</th>
 					</tr>
 				</thead>
 				<tbody id="cuerpo">

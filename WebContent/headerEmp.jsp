@@ -24,7 +24,7 @@
 				    <li><a href="altaProducto.jsp">Alta Productos</a></li>
 				    <li><a href="">Modificar Producto</a></li>
 				    <li><a href="actualizarStock.jsp">Actualizacion de Stock</a></li>
-				    <li><a href="">Actualizacion de Precio</a></li>
+				    <li><a href="actualizarPrecio.jsp">Actualizacion de Precio</a></li>
 				  </ul>
 			  </li>
             <li class="dropdown">

@@ -274,7 +274,7 @@ public class dataProducto {
 
 
 
-	public void modificarProducto (Producto pr) throws ApplicationException{
+	public void modificarProducto(Producto pr) throws ApplicationException{
 		PreparedStatement stmtProducto = null;
 		PreparedStatement stmtPrecio=null;
 
@@ -314,17 +314,18 @@ public class dataProducto {
 	}
 
 	
-	public void ActualizarPrecio (Producto pr) throws ApplicationException{
+	public void actualizarPrecio(Producto pr, float importe, java.util.Date fecha_desde) throws ApplicationException{
 
 		PreparedStatement stmt=null;
 		
 		try {
 			stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
-					"insert into precios (codProducto, fecha_desde, importe"
+					"insert into precios (codProducto, fecha_desde, importe)"
 					+" values (?,?,?)");
 			stmt.setInt(1,pr.getCodProducto());
-			stmt.setDate(2,new java.sql.Date(pr.getFecha().getTime()));
-			stmt.setFloat(3, pr.getImporte());
+			stmt.setDate(2,new java.sql.Date(fecha_desde.getTime()));
+			stmt.setFloat(3, importe);
+			stmt.execute();
 		} catch (SQLException e) {
 			throw new ApplicationException("Error al agregar nuevo precio del producto de la base de datos", e);
 		
@@ -339,18 +340,19 @@ public class dataProducto {
 		}
 	}
 
-	public void ActualizarStock (Producto pr)throws ApplicationException{
+	public void actualizarStock (Producto pr, int cantidad)throws ApplicationException{
 		PreparedStatement stmt =null;
 		
 		try {
 			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(
-					"update precios set stock=?"
-					+ "where codProducto=?");
+					"update productos set stock=stock+? where codProducto=?");
 
-			stmt.setInt(1, pr.getStock());
+			stmt.setInt(1, cantidad);
 			stmt.setInt(2, pr.getCodProducto());
+			stmt.execute();
 		} catch (SQLException e) {
-			throw new ApplicationException("Error al actualizar el stock del producto de la base de datos", e);
+			//throw new ApplicationException("Error al actualizar el stock del producto de la base de datos", e);
+			e.printStackTrace();
 		} finally{
 			try {
 				if(stmt != null) stmt.close();

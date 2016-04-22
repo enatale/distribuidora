@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.Date;
+
 import appExceptions.ApplicationException;
 import datos.dataProducto;
 import entidades.Producto;
@@ -20,12 +22,12 @@ public class CtrlProducto {
 	public Producto getByCodigo(int codigo) throws ApplicationException{
 		return dprod.getByCodigo(codigo);
 	}
-	public void actualizarStock(Producto pr) throws ApplicationException{
-		dprod.ActualizarStock(pr);
+	public void actualizarStock(Producto pr,int cantidad) throws ApplicationException{
+		dprod.actualizarStock(pr,cantidad);
 	}
 	
-	public void actualizarPrecio(Producto pr) throws ApplicationException{
-		dprod.ActualizarPrecio(pr);
+	public void actualizarPrecio(Producto pr,float importe,Date fecha_desde) throws ApplicationException{
+		dprod.actualizarPrecio(pr, importe, fecha_desde);
 	}
 	public void modificarProducto(Producto pr) throws ApplicationException{
 		dprod.modificarProducto(pr);

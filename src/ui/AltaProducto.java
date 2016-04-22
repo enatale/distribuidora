@@ -58,7 +58,7 @@ public class AltaProducto extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Float importe = Float.parseFloat(request.getParameter("txtStock"));
+		Float importe = Float.parseFloat(request.getParameter("txtImporte"));
 		String mensaje ="";
 		if(descripcion.equals("")){
 			mensaje+="El campo descripcion del producto no puede estar en blanco\n";
