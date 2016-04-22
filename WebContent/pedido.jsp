@@ -30,7 +30,7 @@
     	<div class="col-sm-6">
         	<form action="pedido" method="post" id="formItem">
                 <label for="txtDescripcion" class="sr-only">Producto</label>
-                <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" placeholder="Descripción">
+                <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" placeholder="Descripción" autofocus="autofocus">
                 <label for="txtDescripcion" id="errorDescripcion" style="color:#FF0004"></label>
                 
                 <label for="txtCod" class="sr-only">Código</label>

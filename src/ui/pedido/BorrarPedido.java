@@ -40,8 +40,8 @@ public class BorrarPedido extends HttpServlet {
 			request.getSession().removeAttribute("pedido");
 			response.sendRedirect("../pedido.jsp");
 		} catch (ApplicationException e) {
-			request.setAttribute("mensaje", e.getMessage());
-			request.getRequestDispatcher("../pedido.jsp").forward(request, response);
+			request.setAttribute("mensajeError", e.getMessage());
+			request.getRequestDispatcher("mensajePedido.jsp").forward(request, response);
 		}
 	}
 

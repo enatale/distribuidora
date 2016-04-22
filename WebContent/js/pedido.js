@@ -11,7 +11,7 @@ $(document).ready(function(){
     });
 	$("#txtCod").keyup(function(e) {
 		if($("#txtCod").val()==""){
-			$("#cuerpo").html('<tr><td colspan="3"><h2>Comienze a escribir para obtener los productos</h2></td></tr>');
+			$("#cuerpo").html('<tr><td colspan="3"><h2>Comience a escribir para obtener los productos</h2></td></tr>');
 		} else{
 	        var codigo = {codigo:$("#txtCod").val()}
 			$.post("ajaxBusquedaCod",codigo,mostrarProducto);
@@ -88,21 +88,38 @@ function fila_click(){
 function validarCod(){
 	$("#errorCod").html("");
 	$("#txtCod").attr("style","background:#FFF");
+	var valido=true;
 	var cod = $("#txtCod").val();
+	
 	if(cod==""){
 		//Si el campo esta vacio muestro el mensaje y pongo el campo en rojo
 		$("#txtCod").attr("style","background:#f2dede");
 		$("#errorCod").html("El codigo de producto no puede estar en blanco");
-		return false;
-	} else return true;
+		valido=false;
+	}else {
+		if(!cod.match(/^([0-9])*$/)){
+			$("#txtCod").attr("style","background:#f2dede");
+			$("#errorCod").html("El codigo de producto debe ser un número entero");
+			valido=false
+		}
+	}
+	return valido;
 }
 function validarCant(){
 	$("#errorCantidad").html("");
 	$("#txtCantidad").attr("style","background:#FFF");	
 	var cant = $("#txtCantidad").val();
+	var valido=true;
 	if(cant==""){
 		$("#txtCantidad").attr("style","background:#f2dede");
 		$("#errorCantidad").html("La cantidad no puede estar en blanco");
-		return false;
-	} else return true;
+		valido = false;
+	}else{ 
+		if(!cant.match(/^([0-9])*$/)){
+			$("#txtCantidad").attr("style","background:#f2dede");
+			$("#errorCantidad").html("El la cantidad debe ser un número entero");
+			valido=false;
+		}
+	}
+	return valido;
 }
