@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: distribuidora
+-- Host: 127.0.0.1    Database: distribuidora
 -- ------------------------------------------------------
 -- Server version	5.6.25-log
 
@@ -26,7 +26,7 @@ CREATE TABLE `estado_cliente` (
   `id_estado_cliente` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion_estado` varchar(45) NOT NULL,
   PRIMARY KEY (`id_estado_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `estado_cliente` (
 
 LOCK TABLES `estado_cliente` WRITE;
 /*!40000 ALTER TABLE `estado_cliente` DISABLE KEYS */;
+INSERT INTO `estado_cliente` VALUES (1,'Aprobado'),(2,'Rechazado'),(3,'Pendiente');
 /*!40000 ALTER TABLE `estado_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,7 +50,7 @@ CREATE TABLE `estado_pedido` (
   `id_estado_pedido` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion_estado` varchar(45) NOT NULL,
   PRIMARY KEY (`id_estado_pedido`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,6 +59,7 @@ CREATE TABLE `estado_pedido` (
 
 LOCK TABLES `estado_pedido` WRITE;
 /*!40000 ALTER TABLE `estado_pedido` DISABLE KEYS */;
+INSERT INTO `estado_pedido` VALUES (1,'Pendiente'),(2,'Preparado'),(3,'Entregado'),(4,'Pagado'),(5,'Cancelado');
 /*!40000 ALTER TABLE `estado_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +98,7 @@ DROP TABLE IF EXISTS `pedidos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pedidos` (
-  `numero_pedido` int(11) NOT NULL,
+  `numero_pedido` int(11) NOT NULL AUTO_INCREMENT,
   `fecha_pedido` date NOT NULL,
   `fecha_cancelacion` date DEFAULT NULL,
   `id_estado_pedido` int(11) DEFAULT NULL,
@@ -150,6 +152,7 @@ CREATE TABLE `personas` (
 
 LOCK TABLES `personas` WRITE;
 /*!40000 ALTER TABLE `personas` DISABLE KEYS */;
+INSERT INTO `personas` VALUES (11111111,'Federico','Aguirre',4999999,'lalal 3665','aa@gmail.com','federico','aguirre',NULL,1,2456,1),(22222222,'Juan Carlos','Almeida',4999999,'lalal 3665','aa@gmail.com','jc','almeida',NULL,2,564,1),(33333333,'Diego','Stroppiana',4999999,'lalal 3665','aa@gmail.com','diego','sroppiana',NULL,3,65465,1),(44444444,'Nicolas','Totaro',4999999,'lalal 3665','aa@gmail.com','nicolas','totaro',NULL,4,56546,1),(55555555,'Franco','Hernandez',4999999,'lalal 3665','aa@gmail.com','franco','hernandez',NULL,5,65446,1),(66666666,'Marco','Brusa',4999999,'lalal 3665','aa@gmail.com','marco','brusa',NULL,6,654564,1),(77777777,'Valentin','Marimon',4999999,'lalal 3665','aa@gmail.com','valentin','marimon',NULL,7,65456,1),(88888888,'Esteban','Natale',4999999,'lalal 3665','aa@gmail.com','esteban','natale',88888,NULL,NULL,NULL),(99999999,'Magali','Platero',4999999,'lalal 3665','aa@gmail.com','magali','platero',99999,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +178,7 @@ CREATE TABLE `precios` (
 
 LOCK TABLES `precios` WRITE;
 /*!40000 ALTER TABLE `precios` DISABLE KEYS */;
-INSERT INTO `precios` VALUES (1,'2015-10-25',20),(1,'2016-03-25',30);
+INSERT INTO `precios` VALUES (1,'2015-10-25',20),(1,'2016-03-25',30),(2,'2016-03-25',50.25),(3,'2016-03-25',75.66),(4,'2016-03-25',88.99),(5,'2016-03-25',77),(6,'2016-03-25',20),(7,'2016-03-25',30),(8,'2016-03-25',40),(9,'2016-03-25',50),(10,'2016-03-25',60);
 /*!40000 ALTER TABLE `precios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +194,7 @@ CREATE TABLE `productos` (
   `descripcion` varchar(100) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   PRIMARY KEY (`codProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +203,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'coca cola',10);
+INSERT INTO `productos` VALUES (1,'coca cola',1027),(2,'azucar chango',93),(3,'yerba',501),(4,'fernet 1882',17),(5,'vino toro',68),(6,'escobas',30),(7,'arroz susarelli',460),(8,'fernet branca',250),(9,'arroz peleador',92),(10,'vino termidor',75);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -213,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-18  9:35:09
+-- Dump completed on 2016-04-23 18:15:29
