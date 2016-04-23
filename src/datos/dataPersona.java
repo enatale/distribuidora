@@ -3,12 +3,14 @@ package datos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import appExceptions.ApplicationException;
 import entidades.Cliente;
 import entidades.Empleado;
 import entidades.Estado_cliente;
 import entidades.Persona;
+import entidades.Producto;
 
 public class dataPersona {
 	
@@ -148,5 +150,79 @@ public class dataPersona {
 			
 		}
 		return p;
+	}
+	
+	public ArrayList<Cliente> getCliListadoConfirmar() throws ApplicationException{
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Cliente cli=null;
+		ArrayList<Cliente> CliPendiente = new ArrayList<Cliente>();
+		try {
+			stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"Select personas.dni,personas.nombre, personas.apellido,personas.mail,personas.CUIT"
+					+ " from personas"
+					+ " inner join estado_cliente"
+					+ " on personas.id_estado_cliente=estado_cliente.id_estado_cliente "
+					+ " where estado_cliente.descripcion_estado=?");
+			stmt.setString(1, "Pendiente");
+			rs=stmt.executeQuery();
+			while(rs.next()){
+				cli = new Cliente();
+				cli.setDni(rs.getInt("dni"));
+				cli.setNombre(rs.getString("nombre"));
+				cli.setApellido(rs.getString("apellido"));
+				cli.setMail(rs.getString("mail"));
+				cli.setCUIT(rs.getInt("CUIT"));
+				CliPendiente.add(cli);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				if(stmt!=null) stmt.close();
+				if(rs!=null) rs.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+		}
+		
+		return CliPendiente;
+	}
+
+	public void actualizarEstadoCliente(String estado, int dni) throws ApplicationException{
+		PreparedStatement stmtBuscarEstado =null;
+		PreparedStatement stmtActualizarEstado = null;
+		int id_estado=0;
+		ResultSet rs = null;
+		
+		try {
+			stmtBuscarEstado = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select id_estado_cliente from estado_cliente where descripcion_estado=?");
+
+			stmtBuscarEstado.setString(1, estado);
+			rs=stmtBuscarEstado.executeQuery();
+			if(rs.next()){
+			stmtActualizarEstado = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"update personas set personas.id_estado_cliente=? where personas.dni=?");
+			stmtActualizarEstado.setInt(1 ,rs.getInt("id_estado_cliente"));
+			stmtActualizarEstado.setInt(2, dni);
+			stmtActualizarEstado.execute();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				if(stmtBuscarEstado!=null) stmtBuscarEstado.close();
+				if(rs!=null) rs.close();
+				if(stmtActualizarEstado!=null) stmtActualizarEstado.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+			
+		}
 	}
 }
