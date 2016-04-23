@@ -25,8 +25,39 @@ $(document).ready(function(){
 		$("#txtCodigoLinea").val(cod);
 		$("#txtCantidadLinea").val(cant);
 		$("#txtCantidadLinea").focus();
-		$("#txtCantidadLinea").select()
+		$("#txtCantidadLinea").select();
 	});
+	
+	$("#formLinea").submit(function() {
+		var cod=validarCod("txtCodigoLinea");
+		var cant= validarCant("txtCantidadLinea");
+		if(cod&&cant){
+			return true;
+		} else {
+			return false;
+		}
+	});
+	
+	$("#formItem").submit(function() {
+		var cod=validarCod("txtCod");
+		var cant= validarCant("txtCantidad");
+		if(cod&&cant){
+			return true;
+		} else {
+			return false;
+		}
+	});
+	
+	$(".codProducto").focusout(function(e) {
+		validarCod($(this).attr("id"));
+	});
+	$(".cantidad").focusout(function(e) {
+		validarCant($(this).attr("id"));
+	});
+	$("input").keydown(function(){
+		$(this).attr("style","background:#FFF");
+	})
+	
 });//Cierro ready
 
 /////////////////
@@ -77,3 +108,42 @@ function filaBusqueda_click(){
 }
 
 ////////////////////////////
+
+function validarCod(idCampo){
+	$("#error"+idCampo).html("");
+	$("#"+idCampo).attr("style","background:#FFF");
+	var valido=true;
+	var cod = $("#"+idCampo).val();
+	
+	if(cod==""){
+		$("#"+idCampo).attr("style","background:#f2dede");
+		$("#error"+idCampo).html("El codigo de producto no puede estar en blanco");
+		valido=false;
+	}else {
+		if(!cod.match(/^([0-9])*$/)){
+			$("#"+idCampo).attr("style","background:#f2dede");
+			$("#error"+idCampo).html("El codigo de producto debe ser un número entero");
+			valido=false
+		}
+	}
+	return valido;
+}
+
+function validarCant(idCampo){
+	$("#error"+idCampo).html("");
+	$("#"+idCampo).attr("style","background:#FFF");	
+	var cant = $("#"+idCampo).val();
+	var valido=true;
+	if(cant==""){
+		$("#"+idCampo).attr("style","background:#f2dede");
+		$("#error"+idCampo).html("La cantidad no puede estar en blanco");
+		valido = false;
+	}else{ 
+		if(!cant.match(/^([0-9])*$/)){
+			$("#"+idCampo).attr("style","background:#f2dede");
+			$("#error"+idCampo).html("El la cantidad debe ser un número entero");
+			valido=false;
+		}
+	}
+	return valido;
+}

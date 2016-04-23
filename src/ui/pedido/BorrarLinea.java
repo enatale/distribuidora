@@ -37,8 +37,6 @@ public class BorrarLinea extends HttpServlet {
 			} else {
 				int nro = Integer.parseInt(request.getParameter("nro"));
 				Pedidos pedido = (Pedidos)request.getSession().getAttribute("pedido");
-				Linea_pedido lp = pedido.getLineas().get(nro-1);
-				new CtrlPedidos().aumentarStock(lp.getProducto(),lp.getCantidad());
 				pedido.getLineas().remove(nro-1);
 				request.getSession().setAttribute("pedido", pedido);
 				response.sendRedirect("../pedido.jsp");

@@ -115,12 +115,12 @@
 	    			<input type="hidden" name="nroPedido" value="<%=nroPedido %>">
 	    			
 	                <label for="txtCodigoLinea" class="sr-only">Código</label>
-	                <input type="text" id="txtCodigoLinea" name="codProducto" class="form-control" placeholder="Código de producto">
-	                <label for="txtCodigoLinea" id="errorCodigoLinea" style="color:#FF0004"></label>
+	                <input type="text" id="txtCodigoLinea" name="codProducto" class="form-control codProducto" placeholder="Código de producto">
+	                <label for="txtCodigoLinea" id="errortxtCodigoLinea" style="color:#FF0004"></label>
 	                                
 	                <label for="txtCantidadLinea" class="sr-only">Producto</label>
-	                <input type="text" id="txtCantidadLinea" name="cantidad" class="form-control" placeholder="Cantidad">
-	                <label for="txtCantidadLinea" id="errorCantidadLinea" style="color:#FF0004"></label>
+	                <input type="text" id="txtCantidadLinea" name="cantidad" class="form-control cantidad" placeholder="Cantidad">
+	                <label for="txtCantidadLinea" id="errortxtCantidadLinea" style="color:#FF0004"></label>
 	                
 	                <button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button>
 	            </form>
@@ -143,15 +143,15 @@
 	        	
 	                <label for="txtDescripcion" class="sr-only">Producto</label>
 	                <input type="text" id="txtDescripcion" name="descripcion" class="form-control" placeholder="Descripción">
-	                <label for="txtDescripcion" id="errorDescripcion" style="color:#FF0004"></label>
+	                <label for="txtDescripcion" id="errortxtDescripcion" style="color:#FF0004"></label>
 	                
 	                <label for="txtCod" class="sr-only">Código</label>
-	                <input type="text" id="txtCod" name="codigo" class="form-control" placeholder="Código">
-	                <label for="txtCod" id="errorCod" style="color:#FF0004"></label>
+	                <input type="text" id="txtCod" name="codigo" class="form-control codProducto" placeholder="Código">
+	                <label for="txtCod" id="errortxtCod" style="color:#FF0004"></label>
 	                                
 	                <label for="txtCantidad" class="sr-only">Producto</label>
-	                <input type="text" id="txtCantidad" name="cantidad" class="form-control" placeholder="Cantidad">
-	                <label for="txtCantidad" id="errorCantidad" style="color:#FF0004"></label>
+	                <input type="text" id="txtCantidad" name="cantidad" class="form-control cantidad" placeholder="Cantidad">
+	                <label for="txtCantidad" id="errortxtCantidad" style="color:#FF0004"></label>
 	                
 	                <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar</button>
 	            </form>

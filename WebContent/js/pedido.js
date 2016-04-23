@@ -83,6 +83,7 @@ function fila_click(){
 	var descr = $("#desc"+fila).html();
 	$("#txtCod").val(cod);
 	$("#txtDescripcion").val(descr);
+	$("#txtCantidad").focus();
 }
 
 function validarCod(){

@@ -17,6 +17,8 @@ public class dataPedidos {
 	public void registrarPedido(Pedidos pedido, int dni) throws ApplicationException {
 		PreparedStatement stmtPedido = null;
 		PreparedStatement stmtLineas = null;
+		PreparedStatement stmtStock = null;
+		dataProducto dprod = new dataProducto();
 		ResultSet rs = null;
 		try {
 			FactoryConexion.getInstancia().getConnection().setAutoCommit(false);
@@ -32,6 +34,7 @@ public class dataPedidos {
 				pedido.setNumero_pedido(rs.getInt(1));
 			}
 			for (Linea_pedido lp : pedido.getLineas()) {
+				dprod.descontarStock(stmtStock, lp.getCantidad(), lp.getProducto().getCodProducto());
 				this.insertLinea(stmtLineas, pedido.getNumero_pedido(), lp.getProducto().getCodProducto(), lp.getCantidad());
 			}			
 			FactoryConexion.getInstancia().getConnection().commit();
@@ -334,4 +337,5 @@ public class dataPedidos {
 			stmtLineas.setInt(3, cantidad);
 			stmtLineas.execute();
 	}
-}
+
+	}

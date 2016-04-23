@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import appExceptions.ApplicationException;
 import datos.*;
 import entidades.Cliente;
+import entidades.Linea_pedido;
 import entidades.Pedidos;
 import entidades.Persona;
 import entidades.Producto;
@@ -45,26 +46,44 @@ public class CtrlPedidos {
 		return dprod.getByCodigo(codigo);
 	}
 
-	public boolean cantidadSuficiente(Producto producto, int cantidad) throws ApplicationException {
+	/*public boolean cantidadSuficiente(Producto producto, int cantidad) throws ApplicationException {
 		try{
 			int stock=dprod.getStock(producto.getCodProducto());
 			if(stock>=cantidad){
-				dprod.descontarStock(cantidad,producto.getCodProducto());
 				return true;
 			} else{
-				return false;
+				throw new ApplicationException("No se agrego el producto a su pedido. Solo quedan "+ stock +"de ese producto", null);
 			}
 		} catch(NullPointerException e) {
 			throw new ApplicationException("No se encontró producto con el código ingresado", e.getCause());
 		}
+	}*/
+	public int obtenerStock(Producto producto) throws ApplicationException{
+		int stock = 0;
+		try{
+			stock=dprod.getStock(producto.getCodProducto());
+		} catch(NullPointerException e) {
+			throw new ApplicationException("No se encontró producto con el código ingresado", e.getCause());
+		}
+		return stock;		
 	}
-
+	
 	public void aumentarStock(Producto producto, int cantidad) throws ApplicationException {
 		dprod.aumentarStock(producto.getCodProducto(),cantidad);
 		
 	}
 
 	public void confirmarPedido(Pedidos pedido, Cliente cliente) throws ApplicationException {
-		dped.registrarPedido(pedido,cliente.getDni());
+		String mensaje ="";
+		for (Linea_pedido lp : pedido.getLineas()) {
+			int stock = dprod.getStock(lp.getProducto().getCodProducto());
+			if(stock<lp.getCantidad()){
+				mensaje+="<br> Se ha agotado el stock del producto "+lp.getProducto().getCodProducto()+" "+lp.getProducto().getDescripcion();
+				mensaje+=" Eliminar la linea de pedido correspondiente para poder confirmar el pedido";
+			}
+		}
+		if(mensaje.equals("")){
+			dped.registrarPedido(pedido,cliente.getDni());
+		} else throw new ApplicationException(mensaje, null);
 	}
 }
