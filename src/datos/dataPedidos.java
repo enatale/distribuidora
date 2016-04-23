@@ -154,4 +154,74 @@ public class dataPedidos {
 		}
 		return numeros;
 	}
+
+	public Pedidos getByCodPedido(int codigo) throws ApplicationException{
+		PreparedStatement stmt =null;
+		ResultSet rs=null;
+		Pedidos ped = null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select pedidos.numero_pedido, pedidos.fecha_pedido, pedidos.fecha_cancelacion, estado_pedido.id_estado_pedido, estado_pedido.descripcion_estado"
+					+ " from pedidos "
+					+ "inner join estado_pedido "
+					+ "on estado_pedido.id_estado_pedido=pedidos.id_estado_pedido "
+					+ "where numero_pedido=?");
+			stmt.setInt(1, codigo);
+		rs=stmt.executeQuery();
+		if(rs.next()){
+			ped=new Pedidos();
+			ped.setNumero_pedido(rs.getInt("numero_pedido"));
+			ped.setFecha_pedido(rs.getDate("fecha_pedido"));
+			ped.setFecha_cancelacion(rs.getDate("fecha_cancelacion"));
+			ped.setEstado(new Estado_pedido(rs.getInt("id_estado_pedido"),rs.getString("descripcion_estado")));
+			
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				if(stmt!=null) stmt.close();
+				if(rs!=null) rs.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+			
+		}
+
+		return ped;		
+	}
+
+	public void actualizarEstadoPedido(int numPed, String estado) throws ApplicationException{
+		PreparedStatement stmtEstado =null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmtEstado = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select * from estado_pedido where descripcion_estado=?");
+		stmtEstado.setString(1, estado);
+		rs=stmtEstado.executeQuery();
+		if(rs.next()){
+		stmt=FactoryConexion.getInstancia().getConnection().prepareStatement(
+				 "update pedidos set id_estado_pedido=? where numero_pedido=?");
+		stmt.setInt(1, rs.getInt("id_estado_pedido"));
+		stmt.setInt(2, numPed);
+		stmt.execute();
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				if(stmtEstado!=null) stmtEstado.close();
+				if(stmt!=null) stmt.close();
+				if(rs!=null) rs.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+			
+		}
+	}
 }

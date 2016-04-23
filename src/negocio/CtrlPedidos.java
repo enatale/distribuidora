@@ -67,4 +67,14 @@ public class CtrlPedidos {
 	public void confirmarPedido(Pedidos pedido, Cliente cliente) throws ApplicationException {
 		dped.registrarPedido(pedido,cliente.getDni());
 	}
+	
+	public Pedidos getByCodPedido(int codigo) throws ApplicationException{
+
+		return dped.getByCodPedido(codigo);
+	}
+	public void actualizarEstadoPedido(int numPed,String estado) throws ApplicationException{
+
+		 dped.actualizarEstadoPedido(numPed, estado);
+	}
+
 }
