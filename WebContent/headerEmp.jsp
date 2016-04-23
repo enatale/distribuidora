@@ -42,7 +42,7 @@
 				 </a>
 				 <!-- dropdown-->
 				  <ul class="dropdown-menu" role="menu">
-				    <li><a href="">Actualizar estado del pedido</a></li>
+				    <li><a href="buscarPedido.jsp">Actualizar estado del pedido</a></li>
 				  </ul>
 			  </li>
           </ul>
