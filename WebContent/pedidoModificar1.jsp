@@ -25,7 +25,7 @@
   <body>
   
     <%@ include file="header.jsp" %>
-    <%	
+    <%
     	String msj="";
     	ArrayList<Integer> nrosPendientes=new ArrayList<Integer>();
     	Cliente cliente = (Cliente)session.getAttribute("usuario");
@@ -34,7 +34,7 @@
     	<%
     	}else {
     		try{
-    			nrosPendientes = new CtrlModificarPedido().getPedidosPendientes(cliente);
+    			nrosPendientes = new CtrlModificarPedido().getNrosPedidosPendientes(cliente);
     			
     		}catch (ApplicationException e){
     			msj=e.getMessage();
@@ -47,13 +47,24 @@
 	<div class="container">
 	<div class="row" style="height:100%">
 		<div class="col-sm-3 col-sm-offset-2">
-			<form action="">
+			<form action="pedidoModificar2.jsp" id="formNroPedido">
 				<label for="txtNroPedido" class="sr-only">Código</label>
-				<input type="text" id="txtNroPedido" name="txtNroPedido" class="form-control" placeholder="Número de pedido">
+				<input type="text" id="txtNroPedido" name="txtNroPedido" class="form-control" 
+					placeholder="Número de pedido" autofocus="autofocus">
 				<label for="txtNroPedido" id="errorNro" style="color:#FF0004"></label>
 				                
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Modificar</button>
 			</form>
+			<% 
+				String error = (String) request.getAttribute("error");
+        		if(error!=null){
+      		%>
+      			<div class="alert alert-danger" role="alert">
+        			<strong>Error!</strong> <%=error %>
+      			</div>
+      		<%
+        		}
+      		%>
 		</div>
 		<div class="col-sm-4 col-sm-offset-1">
 			<h4 style="text-align:center">Lista de números de pedidos pendientes</h4>

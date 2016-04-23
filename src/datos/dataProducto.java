@@ -40,8 +40,6 @@ public class dataProducto {
 		
 	}
 	
-	
-	
 	public  ArrayList<Producto> getAll(int desde, int hasta) throws ApplicationException{
 
 		ArrayList<Producto> productos = new ArrayList<Producto>();
@@ -89,8 +87,7 @@ public class dataProducto {
 		
 		
 	}
-	
-	
+		
 	public ArrayList<Producto> getByDescripcion(String descripcion,int desde, int hasta) throws ApplicationException {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		Producto prod;
@@ -181,7 +178,6 @@ public class dataProducto {
 		
 	}
 
-
 	public Producto getByCodigo(int cod) throws ApplicationException {
 		Producto prod = null;
 		ResultSet rs= null;
@@ -222,7 +218,6 @@ public class dataProducto {
 		return prod;
 	}
 
-
 	public int getStock(int codProducto) throws ApplicationException {
 		int stock=0;
 		ResultSet rs= null;
@@ -250,15 +245,10 @@ public class dataProducto {
 		return stock;	
 	}
 
-
 	public void descontarStock(int cantidad,int codProducto) throws ApplicationException {
 		PreparedStatement stmt = null;
 		try{
-			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(""
-					+ "update productos set stock=stock-? where codProducto=?");
-			stmt.setInt(1, cantidad);
-			stmt.setInt(2, codProducto);
-			stmt.execute();			
+			descontarStock(stmt,cantidad, codProducto);			
 		} catch (SQLException e){
 			//TODO excepcion
 			e.printStackTrace();			
@@ -272,7 +262,13 @@ public class dataProducto {
 		}
 	}
 
-
+	protected void descontarStock(PreparedStatement stmt, int cantidad, int codProducto) throws SQLException, ApplicationException {
+		stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(""
+				+ "update productos set stock=stock-? where codProducto=?");
+		stmt.setInt(1, cantidad);
+		stmt.setInt(2, codProducto);
+		stmt.execute();
+	}
 
 	public void modificarProducto(Producto pr) throws ApplicationException{
 		PreparedStatement stmtProducto = null;
@@ -312,7 +308,6 @@ public class dataProducto {
 		}
 		
 	}
-
 	
 	public void actualizarPrecio(Producto pr, float importe, java.util.Date fecha_desde) throws ApplicationException{
 
@@ -363,16 +358,10 @@ public class dataProducto {
 		}
 	}
 
-
-
 	public void aumentarStock(int codProducto, int cantidad) throws ApplicationException {
 		PreparedStatement stmt = null;
 		try{
-			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(""
-					+ "update productos set stock=stock+? where codProducto=?");
-			stmt.setInt(1, cantidad);
-			stmt.setInt(2, codProducto);
-			stmt.execute();			
+			aumentarStock(stmt, codProducto, cantidad);			
 		} catch (SQLException e){
 			//TODO excepcion
 			e.printStackTrace();			
@@ -385,6 +374,15 @@ public class dataProducto {
 			}
 		}
 	}
+
+	protected void aumentarStock(PreparedStatement stmt,int codProducto, int cantidad) throws SQLException, ApplicationException {
+		stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(""
+				+ "update productos set stock=stock+? where codProducto=?");
+		stmt.setInt(1, cantidad);
+		stmt.setInt(2, codProducto);
+		stmt.execute();
+	}
+	
 }
 
 		

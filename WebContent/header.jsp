@@ -20,7 +20,7 @@
             <li id="liProductos"><a href="Productos">Productos</a></li>
           <%if(p!=null&&p instanceof Cliente){ %>
             <li id="liPedido"><a href="pedido.jsp">Realizar pedido</a></li>
-            <li id="liModificarPedido"><a href="pedidoModificar.jsp">Modificar/eliminar pedido</a></li>	
+            <li id="liModificarPedido"><a href="pedidoModificar1.jsp">Modificar/eliminar pedido</a></li>	
           <%} %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
