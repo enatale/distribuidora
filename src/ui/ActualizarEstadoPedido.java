@@ -54,12 +54,12 @@ public class ActualizarEstadoPedido extends HttpServlet {
 			if(empleado!=null && empleado.getLegajo()!=0){
 				if(estado.equals("")){
 					ped = new Pedidos();
-					ped=ctrl.getByCodPedido(codigo);
+					ped=ctrl.getByNroPedido(codigo);
 					request.setAttribute("pedido", ped);
 					request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
 				}else{
 					ctrl.actualizarEstadoPedido(codigo,estado);
-					ped=ctrl.getByCodPedido(codigo);
+					ped=ctrl.getByNroPedido(codigo);
 					request.setAttribute("pedido", ped);
 					request.setAttribute("mensajeConfirmacion", "actualizado");
 					request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);

@@ -87,9 +87,9 @@ public class CtrlPedidos {
 		} else throw new ApplicationException(mensaje, null);
 	}
 	
-	public Pedidos getByCodPedido(int codigo) throws ApplicationException{
+	public Pedidos getByNroPedido(int nroPedido) throws ApplicationException{
 
-		return dped.getByCodPedido(codigo);
+		return dped.getByNroPedido(nroPedido);
 	}
 	public void actualizarEstadoPedido(int numPed,String estado) throws ApplicationException{
 
