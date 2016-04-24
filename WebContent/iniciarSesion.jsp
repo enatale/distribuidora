@@ -34,6 +34,8 @@
                 <label for="txtPass" id="errorPass" style="color:#FF0004"></label>
                 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                 <p align="center"><a href="registro.jsp">Registrate</a></p>
+					  
             </form>
             <% 
       			String mensaje=(String)request.getAttribute("mensaje");

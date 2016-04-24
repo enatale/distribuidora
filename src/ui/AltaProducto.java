@@ -46,55 +46,82 @@ public class AltaProducto extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		Empleado empleado = (Empleado) request.getSession().getAttribute("usuario");
 		String descripcion = ((String)request.getParameter("txtDescripcion")).trim();
-		int stock = Integer.parseInt(request.getParameter("txtStock"));
-		String fechaStr = ((String)request.getParameter("txtFecha"));
-		SimpleDateFormat sfd= null;
-		Date fecha_desde = null;
-		try {
-			fecha_desde = new SimpleDateFormat("yyyy-MM-dd").parse(fechaStr);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Float importe = Float.parseFloat(request.getParameter("txtImporte"));
+		
 		String mensaje ="";
-		if(descripcion.equals("")){
-			mensaje+="El campo descripcion del producto no puede estar en blanco\n";
-		}
-		if (stock==0) {
-			mensaje+="El campo stock no puede estar en blanco";
-		}
-		if (fecha_desde.equals(null)) { mensaje+="El campo fecha no puede estar en blanco";
-		}
-		if (importe==0) {
-			mensaje+="El campo importe no puede estar en blanco";
-		}
-		if (!mensaje.equals("")){
-			request.setAttribute("mensaje", mensaje);
-			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
-		} else{
-			Producto pr= new Producto();
-			pr.setDescripcion(descripcion);
-			pr.setStock(stock);
-			pr.setImporte(importe);
-			pr.setFecha(fecha_desde);
-			CtrlProducto producto;
-			
-				producto = new CtrlProducto();
-				try {
-					producto.agregarProducto(pr);
-				    request.setAttribute("mensajeConfirmacion", "El producto fue agregado con exito");
-				    request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
-				} catch (ApplicationException e) {
-					request.setAttribute("mensaje", e.getMessage());
-					request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
+		try{
+			if(empleado!=null && empleado.getLegajo()!=0){
+				if(descripcion.equals("")){
+					mensaje+="El campo descripcion del producto no puede estar en blanco\n";
+				}
+				if (request.getParameter("txtStock").equals("")) {
+					mensaje+="El campo stock no puede estar en blanco";
+				}
+				if (request.getParameter("txtFecha").equals("")) { mensaje+="El campo fecha no puede estar en blanco";
+				}
+				if (request.getParameter("txtImporte").equals("")) {
+					mensaje+="El campo importe no puede estar en blanco";
 				}
 				
-			
-			
+				if (!mensaje.equals("")){
+					request.setAttribute("mensaje", mensaje);
+					request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
+				} else{
+					int stock=Integer.parseInt(request.getParameter("txtStock"));
+					float importe=Float.parseFloat(request.getParameter("txtImporte"));
+					String fechaStr = ((String)request.getParameter("txtFecha"));
+					SimpleDateFormat sfd= null;
+					Date fecha_desde = null;
+					try {
+						fecha_desde = new SimpleDateFormat("yyyy-MM-dd").parse(fechaStr);
+					} catch (ParseException e) {
+						
+						request.setAttribute("mensaje","El campo fecha tiene otro formato");
+						request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
+					}
+					Producto pr= new Producto();
+					pr.setDescripcion(descripcion);
+					pr.setStock(stock);
+					pr.setImporte(importe);
+					pr.setFecha(fecha_desde);
+					CtrlProducto producto;
+					
+						producto = new CtrlProducto();
+						
+							producto.agregarProducto(pr);
+						    request.setAttribute("mensajeConfirmacion", "El producto fue agregado con exito");
+						    request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
+						
+						}
+			}else{
+			throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
+			}
+		}  catch (NumberFormatException e) {
+			String msj="";
+			if(!esEntero(request.getParameter("txtStock"))) msj+="El código de producto debe ser un número entero. \n";
+			if(!esFloat(request.getParameter("txtImporte"))) msj+="El importe debe ser un numero\n";
+			request.setAttribute("mensaje", msj);
+			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
+		} catch (ApplicationException e){
+			request.setAttribute("mensaje", e.getMessage());
+			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
 		}
 	}
-
+	private boolean esEntero(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException e2) {
+			return false;
+		}
+	}
+	private boolean esFloat(String cadena){
+		try {
+			Float.parseFloat(cadena);
+			return true;
+		} catch (NumberFormatException e2) {
+			return false;
+		}
+	}
 }

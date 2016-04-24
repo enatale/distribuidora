@@ -17,6 +17,7 @@
 <body>
 
 	   <%@ include file="headerEmp.jsp" %>
+	   
 	   <% ArrayList<Cliente> clientes; 
 			clientes=(ArrayList<Cliente>) request.getAttribute("clientes"); %>
 			

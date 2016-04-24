@@ -225,4 +225,132 @@ public class dataPersona {
 			
 		}
 	}
+
+	public void agregarCliente(Cliente cli) throws ApplicationException{
+		PreparedStatement stmt=null;
+		PreparedStatement stmtBuscarEstado =null;
+		ResultSet rs = null;
+		
+		try {
+			stmtBuscarEstado = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select id_estado_cliente from estado_cliente where descripcion_estado=?");
+
+			stmtBuscarEstado.setString(1, "Pendiente");
+			rs=stmtBuscarEstado.executeQuery();
+			if(rs.next()){
+			
+				stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
+						"insert into personas (dni,nombre,apellido,telefono,direccion,mail,usuario,contraseña,codCliente,CUIT,id_estado_cliente)"
+						+ "values (?,?,?,?,?,?,?,?,?,?,?)");
+				stmt.setInt(1, cli.getDni());
+				stmt.setString(2, cli.getNombre());
+				stmt.setString(3, cli.getApellido());
+				stmt.setInt(4, cli.getTelefono());
+				stmt.setString(5, cli.getDireccion());
+				stmt.setString(6, cli.getMail());
+				stmt.setString(7, cli.getUsuario());
+				stmt.setString(8, cli.getContraseña());
+				stmt.setInt(9, cli.getCodCliente());
+				stmt.setInt(10, cli.getCUIT());
+				stmt.setInt(11, rs.getInt("id_estado_cliente"));
+				stmt.execute();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmtBuscarEstado!=null) stmtBuscarEstado.close();
+				if(rs!=null) rs.close();
+				if(stmt!=null) stmt.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+		}
+		
+	}
+
+	public int buscarUltCodCli() throws ApplicationException{
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		int proxNum=0;
+		try {
+			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select max(codCliente) cod from personas");
+			rs=stmt.executeQuery();
+			while(rs.next()){
+				proxNum = rs.getInt("cod");
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				if(stmt!=null) stmt.close();
+				if(rs!=null) rs.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+		}
+		return proxNum;
+	}
+
+	public boolean verificarUser(String usuario) throws ApplicationException{
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select * from personas where usuario=?");
+			stmt.setString(1, usuario);
+			rs=stmt.executeQuery();
+			if(rs.getRow()==0){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				if(stmt!=null) stmt.close();
+				if(rs!=null) rs.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+		}
+		return false;
+		
+	}
+
+	public boolean verificarDni(int dni) throws ApplicationException{
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select * from personas where dni=?");
+			stmt.setInt(1, dni);
+			rs=stmt.executeQuery();
+			if(rs.getRow()==0){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				if(stmt!=null) stmt.close();
+				if(rs!=null) rs.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+		}
+		return false;
+		
+	}
 }

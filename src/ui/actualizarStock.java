@@ -18,14 +18,14 @@ import entidades.Producto;
 /**
  * Servlet implementation class actualizarStock
  */
-@WebServlet("/actualizarStock")
-public class actualizarStock extends HttpServlet {
+@WebServlet("/ActualizarStock")
+public class ActualizarStock extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public actualizarStock() {
+    public ActualizarStock() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,21 +53,44 @@ public class actualizarStock extends HttpServlet {
 			}else{
 				int codigo=Integer.valueOf(request.getParameter("txtCod"));
 				pr=ctrl.getByCodigo(codigo);	
+				if(pr.equals(null)){
+
+					request.setAttribute("mensaje", "No se encontro producto con el código ingresado");
+					request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+				}else{
 				cantidad=Integer.parseInt(request.getParameter("txtCantidad"));		
 				ctrl.actualizarStock(pr,cantidad);
 
 			    request.setAttribute("mensajeConfirmacion", "El producto fue modificado con exito");
 			    request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+				}
 			}
 		}else{
 			throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
 		}
+		}catch (NumberFormatException e) {
+			String msj="";
+			if(!esEntero(request.getParameter("txtCod"))) msj+="El código de producto debe ser un número entero. \n";
+			if(!esEntero(request.getParameter("txtCantidad"))) msj+="La cantidad debe ser un número entero. \n";
+			request.setAttribute("mensaje", msj);
+			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+		}catch (NullPointerException e) {
+			request.setAttribute("mensaje", "No se encontro producto con el código ingresado");
+			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
 		}catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
 			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
 		}
 	}
 
+	private boolean esEntero(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException e2) {
+			return false;
+		}
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
