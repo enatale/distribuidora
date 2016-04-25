@@ -2,21 +2,17 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp
-
 # Package Files #
 .jar
 .war
 .ear
-
 # virtual machine crash logs, see httpwww.java.comendownloadhelperror_hotspot.xml
 hs_err_pid
-
 # eclipse specific git ignore
 .pydevproject
 .project
 .metadata
 bin
-tmp
 tmp
 .tmp
 .bak
@@ -27,10 +23,11 @@ local.properties
 .settings
 .loadpath
 .recommenders
-
 # External tool builders
 .externalToolBuilders
-
 # Locally stored Eclipse launch configurations
 .launch
 /build/
+target
+.settings/*
+!.settings/.jsdtscope

@@ -133,7 +133,7 @@ function validarPass(){
 	var pass = $("#txtPass").val();
 	if(pass==""){
 		$("#txtPass").attr("style","background:#f2dede");
-		$("#errorPass").html("La contrasenia no puede estar en blanco");
+		$("#errorPass").html("La contraseña no puede estar en blanco");
 		return false;
 	} else return true;
 }

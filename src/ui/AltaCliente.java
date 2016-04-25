@@ -77,13 +77,13 @@ public class AltaCliente extends HttpServlet {
 				if (request.getParameter("txtTelefono").equals("")) { 
 					mensaje+="El campo telefono no puede estar en blanco\n";
 				}
-				if(ctrl.verificarDni(Integer.parseInt(request.getParameter("txtDni")))){
+				if(!ctrl.verificarDni(Integer.parseInt(request.getParameter("txtDni")))){
 					mensaje+="Existe cliente registrado con el dni ingresado\n";
 				}
 				if (request.getParameter("txtCUIT").equals("")) {
 					mensaje+="El campo CUIT no puede estar en blanco\n";
 				}
-				if(ctrl.verificarUser(usuario)){
+				if(!ctrl.verificarUser(usuario)){
 					mensaje+="El nombre de usuario ya existe, intente con otro\n";
 				}
 					if (!mensaje.equals("")){

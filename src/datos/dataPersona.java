@@ -108,7 +108,7 @@ public class dataPersona {
 					c.setTelefono(rs.getInt("telefono"));
 					c.setUsuario(rs.getString("usuario"));
 					c.setCodCliente(rs.getInt("codCliente"));
-					c.setCUIT(rs.getInt("CUIT"));
+					c.setCUIT(rs.getLong("CUIT"));
 					stmtEstado= FactoryConexion.getInstancia().getConnection().prepareStatement(
 							"Select * from estado_cliente where id_estado_cliente=?");
 					stmtEstado.setInt(1, rs.getInt("id_estado_cliente"));
@@ -251,7 +251,7 @@ public class dataPersona {
 				stmt.setString(7, cli.getUsuario());
 				stmt.setString(8, cli.getContraseña());
 				stmt.setInt(9, cli.getCodCliente());
-				stmt.setInt(10, cli.getCUIT());
+				stmt.setLong(10, cli.getCUIT());
 				stmt.setInt(11, rs.getInt("id_estado_cliente"));
 				stmt.execute();
 			}
