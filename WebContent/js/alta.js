@@ -40,7 +40,7 @@ function validarDesc(){
 	if(desc==""){
 		//Si el campo esta vacio muestro el mensaje y pongo el campo en rojo
 		$("#txtDescripcion").attr("style","background:#f2dede");
-		$("#errorDescripcion").html("la descripcion del producto no puede estar en blanco");
+		$("#errorDescripcion").html("La descripcion del producto no puede estar en blanco");
 		return false;
 	} else return true;
 }
