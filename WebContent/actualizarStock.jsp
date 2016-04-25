@@ -24,7 +24,7 @@
     <div class="container">
     <div class="row" style="height:100%">
     	<div class="col-sm-6">
-        	<form action="actualizarStock" method="post" id="formItem">
+        	<form action="ActualizarStock" method="post" id="formItem">
                 <label for="txtDescripcion" class="sr-only">Producto</label>
                 <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" placeholder="Descripción">
                 <label for="txtDescripcion" id="errorDescripcion" style="color:#FF0004"></label>

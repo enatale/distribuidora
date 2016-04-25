@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$("#formItem").submit(function() {
+	$("#formAltaProducto").submit(function() {
 		var cod=validarCod();
 		var cant= validarCant();
 		if(cod&&cant){

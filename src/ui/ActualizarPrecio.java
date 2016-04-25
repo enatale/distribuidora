@@ -66,21 +66,51 @@ public class ActualizarPrecio extends HttpServlet {
 			}else{
 				int codigo=Integer.valueOf(request.getParameter("txtCod"));
 				pr=ctrl.getByCodigo(codigo);	
+				if(pr.equals(null)){
+
+					request.setAttribute("mensaje", "No se encontro producto con el código ingresado");
+					request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+				}else{
 				importe=Float.parseFloat(request.getParameter("txtImporte"));	
 				ctrl.actualizarPrecio(pr,importe, fecha_desde);
 
 			    request.setAttribute("mensajeConfirmacion", "El precio fue modificado con exito");
 			    request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+				}
 			}
 		}else{
 			throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
 		}
-		}catch (ApplicationException e){
+		}catch (NumberFormatException e) {
+			String msj="";
+			if(!esEntero(request.getParameter("txtCod"))) msj+="El código de producto debe ser un número entero. \n";
+			if(!esFloat(request.getParameter("txtImporte"))) msj+="El importe debe ser un numero\n";
+			request.setAttribute("mensaje", msj);
+			request.getRequestDispatcher("actualizarPrecio.jsp").forward(request, response);
+		}catch (NullPointerException e) {
+			request.setAttribute("mensaje", "No se encontro producto con el código ingresado");
+			request.getRequestDispatcher("actualizarPrecio.jsp").forward(request, response);
+		} catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
-			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+			request.getRequestDispatcher("actualizarPrecio.jsp").forward(request, response);
 		}
 	}
-
+	private boolean esEntero(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException e2) {
+			return false;
+		}
+	}
+	private boolean esFloat(String cadena){
+		try {
+			Float.parseFloat(cadena);
+			return true;
+		} catch (NumberFormatException e2) {
+			return false;
+		}
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

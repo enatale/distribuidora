@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	$("#liPedido").addClass("active");
 	
 	$("#txtDescripcion").keyup(function(e) {
 		if($("#txtDescripcion").val()==""){

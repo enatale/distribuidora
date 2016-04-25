@@ -338,7 +338,6 @@ public class dataPedidos {
 			stmtLineas.execute();
 	}
 
-
 	public void actualizarEstadoPedido(int numPed, String estado) throws ApplicationException{
 		PreparedStatement stmtEstado =null;
 		PreparedStatement stmt=null;

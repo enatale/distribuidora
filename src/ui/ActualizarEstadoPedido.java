@@ -42,34 +42,35 @@ public class ActualizarEstadoPedido extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	CtrlPedidos ctrl = new CtrlPedidos();
+	String mensaje="";
 	Pedidos ped;
-	int codigo;
 	Empleado empleado = (Empleado) request.getSession().getAttribute("usuario");
-	String estado = (String) request.getParameter("Estado");
-	String cod = (String) request.getParameter("txtCodigo");
-	if(cod==null) { codigo=0;}
-	else{codigo = Integer.parseInt(request.getParameter("txtCodigo"));}
-	if(estado==null) estado="";
 		try {
 			if(empleado!=null && empleado.getLegajo()!=0){
-				if(estado.equals("")){
-					ped = new Pedidos();
-					ped=ctrl.getByNroPedido(codigo);
-					request.setAttribute("pedido", ped);
-					request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
+				if(request.getParameter("Estado").equals("")){
+					mensaje+= "El estado del pedido no puede estar vacio\n";
+				}
+				if(request.getParameter("txtNro").equals("")){
+					mensaje+= "El numero del pedido a agregar a pedir no puede estar vacia\n";
+				}
+				if(!mensaje.equals("")){
+					throw new ApplicationException(mensaje, null);
 				}else{
-					ctrl.actualizarEstadoPedido(codigo,estado);
-					ped=ctrl.getByNroPedido(codigo);
+				
+					int numero = Integer.parseInt(request.getParameter("txtNro"));
+					String estado = (String) request.getParameter("Estado");
+					ctrl.actualizarEstadoPedido(numero,estado);
+					ped=ctrl.getByNroPedido(numero);
 					request.setAttribute("pedido", ped);
 					request.setAttribute("mensajeConfirmacion", "actualizado");
 					request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
-				}
+				}	
 			}else{
 				throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
 			}
-		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (ApplicationException e){
+			request.setAttribute("mensaje", e.getMessage());
+			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
 		}
 
 	}

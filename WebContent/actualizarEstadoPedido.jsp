@@ -27,9 +27,9 @@
     	   <div class="col-sm-6 col-sm-offset-3">
 	            <form action="ActualizarEstadoPedido" method="post" >
 	                <h2>Actualizar estado</h2>
-	                <label for="txtCodigo" class="sr-only">Numero Pedido</label>
-	                <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" value="<%=pedido.getNumero_pedido()%>" readonly>
-	                <label for="txtCodigo" id="errorCodigo" style="color:#FF0004"></label>
+	                <label for="txtNro" class="sr-only">Numero Pedido</label>
+	                <input type="text" id="txtNro" name="txtNro" class="form-control" value="<%=pedido.getNumero_pedido()%>" readonly>
+	                <label for="txtNro" id="errorCodigo" style="color:#FF0004"></label>
 	                <select class="form-control" name="Estado">
 					  <option value="Pendiente">Pendiente</option>
 					  <option value="Preparado">Preparado</option>
