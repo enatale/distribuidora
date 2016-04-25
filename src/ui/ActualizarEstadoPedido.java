@@ -68,10 +68,23 @@ public class ActualizarEstadoPedido extends HttpServlet {
 			}else{
 				throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
 			}
-		}catch (ApplicationException e){
+		} catch (NumberFormatException e) {
+			String msj="";
+			if(!esEntero(request.getParameter("txtNro"))) msj+="El código de producto debe ser un número entero. \n";
+			request.setAttribute("mensaje", msj);
+			request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
+		} catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
-			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+			request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
 		}
 
 	}
+		private boolean esEntero(String cadena){
+			try {
+				Integer.parseInt(cadena);
+				return true;
+			} catch (NumberFormatException e2) {
+				return false;
+			}
+		}
 }

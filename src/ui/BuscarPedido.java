@@ -56,20 +56,21 @@ public class BuscarPedido extends HttpServlet {
 			if(!mensaje.equals("")){
 				throw new ApplicationException(mensaje, null);
 			}else{
-				int nroPedido=Integer.valueOf(request.getParameter("txtNro"));
+				int nroPedido=Integer.parseInt(request.getParameter("txtNro"));
 				ped=ctrl.getByNroPedido(nroPedido);
-				if(ped.equals(null)){
-
-					request.setAttribute("mensaje", "No se encontro pedido con el numero ingresado");
-					request.getRequestDispatcher("buscarPedido.jsp").forward(request, response);
+				if(ped.getFecha_cancelacion()==null){
+					   request.setAttribute("pedido", ped);
+					   request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
 				}else{
-			    request.setAttribute("pedido", ped);
-			    request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
+
+					request.setAttribute("mensaje", "El pedido esta en estado cancelado");
+					request.getRequestDispatcher("buscarPedido.jsp").forward(request, response);
 				}
+				
 			}
 		}else{
 			throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
-		}
+			}
 		} catch (NumberFormatException e) {
 			String msj="";
 			if(!esEntero(request.getParameter("txtNro"))) msj+="El código de producto debe ser un número entero. \n";

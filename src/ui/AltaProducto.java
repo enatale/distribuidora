@@ -70,16 +70,11 @@ public class AltaProducto extends HttpServlet {
 				} else{
 					int stock=Integer.parseInt(request.getParameter("txtStock"));
 					float importe=Float.parseFloat(request.getParameter("txtImporte"));
-					String fechaStr = ((String)request.getParameter("txtFecha"));
+					String fechaStr = ((String)request.getParameter("txtFecha")).trim();
 					SimpleDateFormat sfd= null;
 					Date fecha_desde = null;
-					try {
-						fecha_desde = new SimpleDateFormat("yyyy-MM-dd").parse(fechaStr);
-					} catch (ParseException e) {
-						
-						request.setAttribute("mensaje","El campo fecha tiene otro formato");
-						request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
-					}
+				    fecha_desde = new SimpleDateFormat("yyyy-MM-dd").parse(fechaStr);
+				   
 					Producto pr= new Producto();
 					pr.setDescripcion(descripcion);
 					pr.setStock(stock);
@@ -103,7 +98,11 @@ public class AltaProducto extends HttpServlet {
 			if(!esFloat(request.getParameter("txtImporte"))) msj+="El importe debe ser un numero\n";
 			request.setAttribute("mensaje", msj);
 			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
-		} catch (ApplicationException e){
+		}catch(ParseException e){
+
+			request.setAttribute("mensaje", "formato de la fecha no es valido, intente con YYYY-mm-dd");
+			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
+		}catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
 			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
 		}
@@ -124,4 +123,6 @@ public class AltaProducto extends HttpServlet {
 			return false;
 		}
 	}
+	
+
 }

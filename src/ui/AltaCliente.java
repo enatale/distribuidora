@@ -97,6 +97,7 @@ public class AltaCliente extends HttpServlet {
 						cli = new Cliente();
 						
 						int codCliente = ctrl.buscarUltCodCli();
+						codCliente = codCliente +1;
 						cli.setNombre(nombre);
 						cli.setApellido(apellido);
 						cli.setDni(dni);

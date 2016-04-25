@@ -2,8 +2,7 @@ $(document).ready(function(){
 	
 	$("#formAltaProducto").submit(function() {
 		var nro=validarNro();
-		var stock= validarStock();
-		if(nro&&stock){
+		if(nro){
 			return true;
 		} else {
 			return false;
@@ -13,9 +12,7 @@ $(document).ready(function(){
 	$("#txtNro").focusout(function(e) {
 		validarNum();
 	});
-	$("#txtStock").focusout(function(e) {
-		validarStock();
-	});
+	
 	
 //	$("#txtFecha").focusout(function(e) {
 	//	validaFechaAAAAMMDD();
@@ -39,13 +36,4 @@ function validarNum(){
 		return false;
 	} else return true;
 }
-function validarStock(){
-	$("#errorStock").html("");
-	$("#txtStock").attr("style","background:#FFF");	
-	var cant = $("#txtStock").val();
-	if(cant==""){
-		$("#txtStock").attr("style","background:#f2dede");
-		$("#errorStock").html("El Stock no puede estar en blanco");
-		return false;
-	} else return true;
-}
+
