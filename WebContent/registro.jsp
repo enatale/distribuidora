@@ -54,7 +54,7 @@
 	                
 	                   
 	                <label for="txtPass" class="sr-only">Password</label>
-	                <input type="text" id="txtPass" name="txtPass" class="form-control" placeholder="Password">
+	                <input type="password" id="txtPass" name="txtPass" class="form-control" placeholder="Password">
 	                <label for="txtPass" id="errorPass" style="color:#FF0004"></label>
 	                
 	                <label for="txtCUIT" class="sr-only">CUIT</label>
