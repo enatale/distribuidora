@@ -184,7 +184,7 @@ public class dataProducto {
 		PreparedStatement stmt = null;
 		try{
 			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement(
-					"select productos.codProducto,productos.descripcion,productos.stock,precios.importe "
+					"select productos.codProducto,productos.descripcion,productos.stock,precios.importe, precios.fecha_desde "
 							+ "from productos "
 							+ "inner join precios "
 							+ "on precios.codProducto=productos.codProducto "
@@ -201,6 +201,8 @@ public class dataProducto {
 				prod.setCodProducto(rs.getInt("codProducto"));
 				prod.setDescripcion(rs.getString("descripcion"));
 				prod.setImporte(rs.getFloat("importe"));
+				prod.setFecha(rs.getDate("fecha_desde"));
+				prod.setStock(rs.getInt("stock"));
 			}
 			
 		} catch (SQLException e){
@@ -270,24 +272,26 @@ public class dataProducto {
 		stmt.execute();
 	}
 
-	public void modificarProducto(Producto pr) throws ApplicationException{
+	public void modificarProducto(Producto pr, String descripcion, int stock,java.util.Date fecha, float importe) throws ApplicationException{
 		PreparedStatement stmtProducto = null;
 		PreparedStatement stmtPrecio=null;
 
 		try {
 		FactoryConexion.getInstancia().getConnection().setAutoCommit(false);
 		stmtProducto = FactoryConexion.getInstancia().getConnection().prepareStatement(
-				"update productos set descripcion=?"
-				+ "where codProducto=?");
-		stmtProducto.setString(1, pr.getDescripcion());
-		stmtProducto.setInt(1, pr.getCodProducto());
+				"update productos set descripcion=? ,stock=? "
+				+ " where codProducto=?");
+		stmtProducto.setString(1, descripcion);
+		stmtProducto.setInt(2, stock);
+		stmtProducto.setInt(3, pr.getCodProducto());
 		stmtProducto.execute();
 		stmtPrecio = FactoryConexion.getInstancia().getConnection().prepareStatement(
-				"update precios set importe = ?"
+				"update precios set importe = ?, fecha_desde=?"
 				+ "where codProducto=? and fecha_desde = ?");
 		stmtPrecio.setFloat(1, pr.getImporte());
-		stmtPrecio.setInt(2, pr.getCodProducto());
-		stmtPrecio.setDate(3, new java.sql.Date(pr.getFecha().getTime()));
+		stmtPrecio.setDate(2, new java.sql.Date(fecha.getTime()));
+		stmtPrecio.setInt(3, pr.getCodProducto());
+		stmtPrecio.setDate(4, new java.sql.Date(pr.getFecha().getTime()));
 		} catch (SQLException e) {
 			try {
 				FactoryConexion.getInstancia().getConnection().rollback();

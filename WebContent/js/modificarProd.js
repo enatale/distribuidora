@@ -1,28 +1,13 @@
 $(document).ready(function(){
 	
-	$("#txtDescripcion").keyup(function(e) {
-		if($("#txtDescripcion").val()==""){
-			$("#cuerpo").html('<tr><td colspan="3"><h2>Comience a escribir para obtener los productos</h2></td></tr>');
-		} else{
-	        var descripcion = {descripcion:$("#txtDescripcion").val()}
-			$.post("ajaxBusquedaDesc",descripcion,llenarTabla);
-		}
-    });
-	$("#txtCod").keyup(function(e) {
-		if($("#txtCod").val()==""){
-			$("#cuerpo").html('<tr><td colspan="3"><h2>Comienze a escribir para obtener los productos</h2></td></tr>');
-		} else{
-	        var codigo = {codigo:$("#txtCod").val()}
-			$.post("ajaxBusquedaCod",codigo,mostrarProducto);
-		}
-    });
 	
 	$("#formItem").submit(function() {
 		var cod=validarCod();
 		var desc= validarDesc();
 		var imp= validarImporte();
 		var fec= validarFecha();
-		if(cod&&desc&&imp&&fec){
+		var st= validarStock()
+		if(cod&&desc&&imp&&fec&&st){
 			return true;
 		} else {
 			return false;
@@ -40,6 +25,9 @@ $(document).ready(function(){
 	});
 	$("#txtFecha").focusout(function(e) {
 		validarFecha();
+	});
+	$("#txtStock").focusout(function(e) {
+		validarCant();
 	});
 //	$("#txtFecha").focusout(function(e) {
 	//	validaFechaAAAAMMDD();
@@ -162,4 +150,14 @@ function isValidDate(str){
 	if( (m[3].length < 2) || m[3] < 1 || m[3] > 31){ret = false;}
 	
 	return ret;			
+}
+function validarStock(){
+	$("#errorStock").html("");
+	$("#txtStock").attr("style","background:#FFF");	
+	var cant = $("#txtStock").val();
+	if(cant==""){
+		$("#txtStock").attr("style","background:#f2dede");
+		$("#errorStock").html("El stock no puede estar en blanco");
+		return false;
+	} else return true;
 }
