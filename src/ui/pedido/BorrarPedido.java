@@ -7,11 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import appExceptions.ApplicationException;
-import entidades.Linea_pedido;
-import entidades.Pedidos;
-import negocio.CtrlPedidos;
-
 /**
  * Servlet implementation class BorrarPedido
  */
@@ -31,18 +26,8 @@ public class BorrarPedido extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			CtrlPedidos ctrl= new CtrlPedidos();
-			Pedidos pedido = (Pedidos) request.getSession().getAttribute("pedido");
-			for (Linea_pedido lp : pedido.getLineas()) {
-				ctrl.aumentarStock(lp.getProducto(),lp.getCantidad());
-			}
-			request.getSession().removeAttribute("pedido");
-			response.sendRedirect("../pedido.jsp");
-		} catch (ApplicationException e) {
-			request.setAttribute("mensajeError", e.getMessage());
-			request.getRequestDispatcher("mensajePedido.jsp").forward(request, response);
-		}
+		request.getSession().removeAttribute("pedido");
+		response.sendRedirect("../pedido.jsp");
 	}
 
 	/**

@@ -35,6 +35,18 @@
 	    } else throw new ApplicationException("Error al recepcionar el nro de pedido",null);
 	    
 	    pedido= new CtrlModificarPedido().getByNro(nroPedido);
+	    if(cliente==null){
+	    	throw new ApplicationException("Para ver esta página debe estar logueado como cliente", null);
+	    }
+	    if(pedido==null){
+	    	throw new ApplicationException("El pedido seleccionado no existe",null);
+	    }
+	    if(pedido.getCliente().getDni()!=cliente.getDni()){
+	    	throw new ApplicationException("El pedido seleccionado no corresponde al usuario loggeado",null);
+	    }
+	    if(pedido.getEstado().getId_estado_pedido()!=1){
+	    	throw new ApplicationException("El pedido seleccionado no está \"pendiente\"",null);
+	    }
 	    for(int i=0; i+1<pedido.getLineas().size();i++){
 	    	for(int j=i+1; j<pedido.getLineas().size();j++){
 	    		Linea_pedido auxiliar;
@@ -187,12 +199,11 @@
 		<%}	
     } catch (ApplicationException e){%>
     	<h1 style="color: red; text-align: center;"><%=e.getMessage() %></h1>
+    	<h4 style="text-align: center;"><a href="pedidoModificar1.jsp">Volver</a></h4>
     <%}catch(NumberFormatException e){
-    	request.setAttribute("error", "La cantidad debe ser un número entero");
-    	request.getRequestDispatcher("pedidoModificar1.jsp").forward(request, response);
+	   	request.setAttribute("error", "La cantidad debe ser un número entero");
+	   	request.getRequestDispatcher("pedidoModificar1.jsp").forward(request, response);
     }%>
-    
-       
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

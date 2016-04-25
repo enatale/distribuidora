@@ -3,7 +3,6 @@ package datos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import appExceptions.ApplicationException;
@@ -106,7 +105,25 @@ public class dataPedidos {
 			rs=stmtPedido.executeQuery();
 			if(rs.next()){
 				ped=new Pedidos();
-				ped.setEstado(new Estado_pedido(1, "pendiente"));
+				Estado_pedido estado = null;
+				switch (rs.getInt("id_estado_pedido")) {
+				case 1:
+					estado = new Estado_pedido(1, "Pendiente");
+					break;
+				case 2:
+					estado = new Estado_pedido(2, "Preparado");
+					break;
+				case 3:
+					estado = new Estado_pedido(3, "Entregado");
+					break;
+				case 4:
+					estado = new Estado_pedido(4, "Pagado");
+					break;
+				case 5:
+					estado = new Estado_pedido(5, "Cancelado");
+					break;
+				}
+				ped.setEstado(estado);
 				ped.setFecha_cancelacion(rs.getDate("fecha_cancelacion"));
 				ped.setFecha_pedido(rs.getDate("fecha_pedido"));
 				ped.setNumero_pedido(rs.getInt("numero_pedido"));
@@ -251,9 +268,11 @@ public class dataPedidos {
 
 	public void updateLinea(int nroPedido, int codProducto, int cantNueva) throws ApplicationException {
 		PreparedStatement stmtLinea = null;
-		PreparedStatement stmtSotck = null;
+		PreparedStatement stmtConsultaStock = null;
+		PreparedStatement stmtAumentaSotck = null;
 		PreparedStatement stmtCantidad = null;
 		ResultSet rsCantidad=null;
+		ResultSet rsStock = null;
 		dataProducto dprod = new dataProducto();
 		int cantVieja=0;
 		try {
@@ -263,9 +282,19 @@ public class dataPedidos {
 			stmtCantidad.setInt(1, codProducto);
 			stmtCantidad.setInt(2, nroPedido);
 			rsCantidad = stmtCantidad.executeQuery();
+			boolean estaProducto = false;
 			if(rsCantidad.next()){
 				cantVieja= rsCantidad.getInt("cantidad");
-				dprod.aumentarStock(stmtSotck, codProducto, cantVieja-cantNueva);
+				int stock = dprod.getStock(stmtConsultaStock, rsStock, codProducto);
+				if(cantVieja-cantNueva<0&&stock<cantNueva-cantVieja){
+					throw new ApplicationException("No hay stock suficiente para el producto seleccionado", null);
+				} else{
+					dprod.aumentarStock(stmtAumentaSotck, codProducto, cantVieja-cantNueva);
+					estaProducto = true;
+				}
+			}
+			if(!estaProducto){
+				throw new ApplicationException("El producto ingresado no se encuentra en el pedido.", null);
 			}
 			stmtLinea = FactoryConexion.getInstancia().getConnection().prepareStatement(
 					"update linea_pedido set cantidad=? where numero_pedido=? and codProducto=?");
@@ -285,9 +314,11 @@ public class dataPedidos {
 				try {
 					FactoryConexion.getInstancia().getConnection().setAutoCommit(true);
 					if(stmtLinea != null)stmtLinea.close();
-					if(stmtSotck != null) stmtSotck.close();
+					if(stmtAumentaSotck != null) stmtAumentaSotck.close();
 					if(stmtCantidad != null) stmtCantidad.close();
 					if(rsCantidad != null) rsCantidad.close();
+					if(stmtConsultaStock != null) stmtConsultaStock.close();
+					if(rsStock != null) rsStock.close();
 					FactoryConexion.getInstancia().releaseConnection();
 				} catch (SQLException e) {
 					throw new ApplicationException("Error al cerrar conexiones con la base de datos", e.getCause());

@@ -36,7 +36,6 @@ public class ajaxBusquedaDesc extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int inicio=0;
 		CtrlPedidos ctrl = new CtrlPedidos();
-		//TODO aumentar cant_por_pagima
 		int cant_por_pagina=5;
 		String descripcion = request.getParameter("descripcion");
 		ArrayList<Producto> productos;
