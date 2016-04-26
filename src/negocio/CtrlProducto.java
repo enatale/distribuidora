@@ -1,5 +1,6 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import appExceptions.ApplicationException;
@@ -33,5 +34,7 @@ public class CtrlProducto {
 		dprod.modificarProducto(pr,descripcion,stock, fecha, importe);
 	}
 
-	
+	public ArrayList<Producto> getProdsinStock() throws ApplicationException{
+		return dprod.getProdSinStock();
+	}
 }
