@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="negocio.CtrlPedidos"%>
 <%@page import="negocio.CtrlProducto"%>
 <%@page import="entidades.Empleado"%>
@@ -28,11 +30,25 @@
 		Empleado emp = (Empleado)session.getAttribute("usuario");
 		Integer totalPaginas;
 		Integer pagina;
+		String fecha;
 		//TODO aumentar cant por pag
 		int cant_por_pagina=2;
 	try{
 		if(emp==null||emp.getLegajo()==0){
 			throw new ApplicationException("Para ver esta página debe iniciar sesión como empleado. ",null);
+		}
+		if(request.getAttribute("fecha")!=null){
+			fecha=(String)request.getAttribute("fecha");
+		} else {
+			//Obtengo la fecha de hoy con formato aaaa-mm-dd
+			String dia="",mes="",anio="";
+			Calendar c = Calendar.getInstance();
+			if(c.get(Calendar.MONTH)<10) mes+="0";
+			if(c.get(Calendar.DATE)<10) dia+="0";
+			mes+= String.valueOf(c.get(Calendar.MONTH));
+			dia += String.valueOf(c.get(Calendar.DATE));
+			anio = String.valueOf(c.get(Calendar.YEAR));
+			fecha=anio+"-"+mes+"-"+dia;
 		}
 		if (request.getAttribute("productos")!=null){
 			productos=(ArrayList<Producto>) request.getAttribute("productos");
@@ -105,7 +121,7 @@
 				} else{
 					%>
 					
-					<a class="btn btn-default" href="reportePrecios?pagina=<%=i%>&fecha="><%=i%></a>
+					<a class="btn btn-default" href="reportePrecios?pagina=<%=i%>&fecha=<%=fecha%>"><%=i%></a>
 					<%
 				}
 			}
