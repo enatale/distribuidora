@@ -20,9 +20,12 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-      <div class="container">
-      </div>
-    </div>    
+	    <div class="container">
+	    	<h1>Bienvenido al sistema.</h1>
+	        <h2>Ud. ha iniciado sesión como empleado de la empresa.</h2>
+	        <p>Para acceder a las distintas secciones del sitio web utilice las opciones de la barra de navegación.</p>
+	    </div>
+	</div>  
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
