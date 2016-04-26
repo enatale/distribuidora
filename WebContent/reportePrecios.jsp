@@ -50,7 +50,7 @@
 			<div class="col-md-2 col-md-offset-5">
 			<form action="reportePrecios" method="get" id="formFecha">
 				<input type="date" id="txtFecha" name="fecha" class="form-control" placeholder="AAAA-MM-DD">
-				<button type="submit" class="btn btn-large btn-primary">Consultar</button>
+				<button type="submit" class="btn btn-large btn-primary btn-block">Consultar</button>
 			</form>
 			</div>
 		</div>
