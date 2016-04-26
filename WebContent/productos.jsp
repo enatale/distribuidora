@@ -2,11 +2,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-   <%
-   
-    Integer limit = (Integer)request.getAttribute("limitHasta");
-    request.setAttribute("limit", limit);
-   %>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -30,7 +25,6 @@
 <% 	ArrayList<Producto> productos; 
 	productos=(ArrayList<Producto>) request.getAttribute("productos");
 	Integer totalPaginas=(Integer)request.getAttribute("totalPaginas");
-	Integer totalProductos=(Integer)request.getAttribute("totalProductos");
 	Integer pagina = (Integer)request.getAttribute("pagina");
 	%>
 <div class="row" style="text-align: center">
@@ -43,7 +37,7 @@
       <tr>
         <th>Id</th>
         <th>Descripcion</th>
-        <th>Stock</th>
+        <th>Precio</th>
       </tr>
     </thead>
     <tbody>
