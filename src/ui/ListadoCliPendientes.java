@@ -44,33 +44,53 @@ public class ListadoCliPendientes extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String mensaje="";
 		int dniInt;
 		CtrlPersona ctrl = new CtrlPersona();
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 		Empleado empleado = (Empleado) request.getSession().getAttribute("usuario");
 		String estado = (String) request.getParameter("Estado");
-		String dni = (String) request.getParameter("txtDni");
-		if(dni==null) { dniInt=0;}
-		else{dniInt = Integer.parseInt(request.getParameter("txtDni"));}
 		
 		try {
 		if(empleado!=null && empleado.getLegajo()!=0){
-			if(estado!=null && dniInt!=0){
-			ctrl.actualizarEstadoCliente(estado,dniInt);
+			
+			
+			if (request.getParameter("txtDni").equals("")) { mensaje+="El campo dni no puede estar en blanco";
 			}
-			clientes= ctrl.getCliListadoConfirmar();
-			request.setAttribute("clientes", clientes);
-			request.getRequestDispatcher("listadoCliPendientes.jsp").forward(request, response);
+			if (estado.equals("")) {
+				mensaje+="El campo estado no puede estar en blanco";
+			}
+			
+			if (!mensaje.equals("")){
+				request.setAttribute("mensaje", mensaje);
+				request.getRequestDispatcher("listadoCliPendientes.jsp").forward(request, response);
+			}
+			else{
+				dniInt=Integer.parseInt(request.getParameter("txtDni"));
+				ctrl.actualizarEstadoCliente(estado,dniInt);
+				response.sendRedirect("listadoCliPendientes.jsp");
+			}
 			
 		}else{
 			throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
 		}
+		}catch (NumberFormatException e) {
+			String msj="";
+			if(!esEntero(request.getParameter("txtStock"))) msj+="El código de producto debe ser un número entero. \n";
+			request.setAttribute("mensaje", msj);
+			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
 		}catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
 			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
 		}
 	
+	}
+	private boolean esEntero(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException e2) {
+			return false;
+		}
 	}
 
 }
