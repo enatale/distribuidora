@@ -225,12 +225,7 @@ public class dataProducto {
 		ResultSet rs= null;
 		PreparedStatement stmt = null;
 		try{
-			stmt= FactoryConexion.getInstancia().getConnection().prepareStatement("select stock from productos where codProducto=?");
-			stmt.setInt(1, codProducto);
-			rs=stmt.executeQuery();
-			if(rs.next()){
-				stock=rs.getInt("stock");
-			}
+			stock = this.getStock(stmt, rs, codProducto);
 			
 		} catch (SQLException e){
 			//TODO excepcion
@@ -247,6 +242,17 @@ public class dataProducto {
 		return stock;	
 	}
 
+	
+	protected int getStock(PreparedStatement stmt, ResultSet rs, int codProducto) throws SQLException, ApplicationException {
+		int stock=0;
+		stmt= FactoryConexion.getInstancia().getConnection().prepareStatement("select stock from productos where codProducto=?");
+		stmt.setInt(1, codProducto);
+		rs=stmt.executeQuery();
+		if(rs.next()){
+			stock=rs.getInt("stock");
+		}
+		return stock;
+	}
 	public void descontarStock(int cantidad,int codProducto) throws ApplicationException {
 		PreparedStatement stmt = null;
 		try{

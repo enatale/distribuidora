@@ -24,11 +24,17 @@ public class CtrlModificarPedido {
 	}
 
 	public void borrarLinea(int nroPedido, int codProducto, int cantidad) throws ApplicationException {
-		dped.deleteLinea(nroPedido,codProducto, cantidad);		
+		Pedidos ped=dped.getByNroPedido(nroPedido);
+		if(ped.getEstado().getId_estado_pedido()==1){
+			dped.deleteLinea(nroPedido,codProducto, cantidad);
+		} else throw new ApplicationException("El estado del pedido que quiere modificar no es \"pendiente\"", null);
 	}
 
 	public void cancelarPedido(int nroPedido) throws ApplicationException {
-		dped.cancelarPedido(nroPedido);
+		Pedidos ped=dped.getByNroPedido(nroPedido);
+		if(ped.getEstado().getId_estado_pedido()==1){
+			dped.cancelarPedido(nroPedido);
+		} else throw new ApplicationException("El estado del pedido que quiere modificar no es \"pendiente\"", null);
 		
 	}
 

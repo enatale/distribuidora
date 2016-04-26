@@ -43,7 +43,6 @@ public class LineaGuardadaBorrar extends HttpServlet {
 				int nroPedido = Integer.parseInt(request.getParameter("nroPedido"));
 				int codProducto =  Integer.parseInt(request.getParameter("codProducto"));
 				int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-				Pedidos pedido = (Pedidos)request.getSession().getAttribute("pedido");
 				new CtrlModificarPedido().borrarLinea(nroPedido,codProducto, cantidad);
 				response.sendRedirect("../pedidoModificar2.jsp?txtNroPedido="+nroPedido);
 			}
