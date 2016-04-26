@@ -28,7 +28,7 @@
 	            <div class="col-md-6">
 	                <img src="imagen.jpg" class="img-responsive img-rounded" alt="edificio">
 	            </div>
-	            <div class="vert">
+	            <div class="col-md-6">
 	                <h3 style="text-align:center">Bienvenido al sitio de:</h3>
 	                <h1 style="color: #00D3ED;text-align:center">Distribuidora Remar</h1>
 	                <p>Nuestra empresa se dedica a la comercialización de productos de almacén, tales como alimentos, bebidas, productos de limpieza, etc.</p>
