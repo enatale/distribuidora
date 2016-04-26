@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a id="marca" class="navbar-brand" href="#">Distribuidora REMAR</a>
+          <a id="marca" class="navbar-brand" href="inicioEmp.jsp">Distribuidora REMAR</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
