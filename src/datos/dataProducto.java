@@ -242,7 +242,6 @@ public class dataProducto {
 		return stock;	
 	}
 
-	
 	protected int getStock(PreparedStatement stmt, ResultSet rs, int codProducto) throws SQLException, ApplicationException {
 		int stock=0;
 		stmt= FactoryConexion.getInstancia().getConnection().prepareStatement("select stock from productos where codProducto=?");
@@ -253,6 +252,7 @@ public class dataProducto {
 		}
 		return stock;
 	}
+	
 	public void descontarStock(int cantidad,int codProducto) throws ApplicationException {
 		PreparedStatement stmt = null;
 		try{
@@ -394,6 +394,38 @@ public class dataProducto {
 		stmt.execute();
 	}
 	
+	public ArrayList<Producto> getProdSinStock() throws  ApplicationException{
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Producto pr;
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+		try {
+			stmt=FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select * from productos where stock=0");
+			rs=stmt.executeQuery();
+			if(rs.next()){
+				pr=new Producto();
+				pr.setCodProducto(rs.getInt("codProducto"));
+				pr.setDescripcion(rs.getString("descripcion"));
+				productos.add(pr);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				if(stmt != null) stmt.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al liberar recursos de la base de datos", e);
+			}
+		}
+		
+			
+		
+		return productos;
+	}
 }
 
 		
