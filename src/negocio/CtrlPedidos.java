@@ -1,6 +1,7 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import appExceptions.ApplicationException;
 import datos.*;
@@ -94,6 +95,10 @@ public class CtrlPedidos {
 	public void actualizarEstadoPedido(int numPed,String estado) throws ApplicationException{
 
 		 dped.actualizarEstadoPedido(numPed, estado);
+	}
+
+	public ArrayList<Producto> getAll(int inicio, int cant_por_pagina, Date fecha) throws ApplicationException {
+		return dprod.getAll(inicio, cant_por_pagina, fecha);
 	}
 
 }

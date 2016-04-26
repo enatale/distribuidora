@@ -46,6 +46,15 @@
 				    <li><a href="buscarPedido.jsp">Actualizar estado del pedido</a></li>
 				  </ul>
 			  </li>
+			  <li class="dropdown">
+				<a href="#" class="dropdown-toggle"  data-toggle="dropdown">
+				    Reportes<span class="caret"></span>
+				 </a>
+				 <!-- dropdown-->
+				  <ul class="dropdown-menu" role="menu">
+				    <li><a href="reportePrecios.jsp">Lista de precios</a></li>
+				  </ul>
+			  </li>
           </ul>
            <ul class="nav navbar-nav navbar-right">
           <%

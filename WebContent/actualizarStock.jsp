@@ -20,7 +20,7 @@
   
     <%@ include file="headerEmp.jsp" %>
     
-    <h1 style="text-align:center">Realice su pedido</h1>
+    <h1 style="text-align:center">Actualizar stock</h1>
     <div class="container">
     <div class="row" style="height:100%">
     	<div class="col-sm-6">
