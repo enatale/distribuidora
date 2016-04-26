@@ -40,11 +40,21 @@ public class FactoryConexion {
 	public Connection getConnection() throws ApplicationException{
 		try {
 			if(connection==null||connection.isClosed()){
-				connection= DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+pass);
+				
+				//PARA SERVIDOR
+				connection= DriverManager.getConnection(
+						"jdbc:mysql://node124276-distribuidora.j.layershift.co.uk/"+db+"?user="+user+"&password="+pass);
+				
+				//PARA USAR LOCAL
+//				connection= DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+pass);
+				
+				
+				
 				connAbiertas++;
 			}
 		} catch (SQLException e) {
 			throw new ApplicationException("Error al establecer la conexion con la base de datos", e);
+			
 		}
 		return connection;
 	}

@@ -20,7 +20,7 @@
   
     <%@ include file="headerEmp.jsp" %>
     
-    <h1 style="text-align:center">Realice su pedido</h1>
+    <h1 style="text-align:center">Actualizar precio</h1>
     <div class="container">
     <div class="row" style="height:100%">
     	<div class="col-sm-6">
@@ -34,7 +34,7 @@
               	    <label for="txtCod" id="errorCod" style="color:#FF0004"></label>
 	                
 	                <label for="txtFecha" class="sr-only">Fecha Importe</label>
-	                <input type="text" id="txtFecha" name="txtFecha" class="form-control" Placeholder="YYYY-MM-dd">
+	                <input type="date" id="txtFecha" name="txtFecha" class="form-control" Placeholder="YYYY-MM-dd">
 	                <label for="txtFecha" id="errorFecha" style="color:#FF0004"></label>
 	                
 	                <label for="txtImporte" class="sr-only">Importe</label>
