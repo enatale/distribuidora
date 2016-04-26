@@ -54,62 +54,60 @@ public class ModificarProducto extends HttpServlet {
 		SimpleDateFormat sfd= null;
 		Date fecha_desde = null;
 		
-			
-		
-		try{
-		if(empleado!=null && empleado.getLegajo()!=0){
-			if(request.getParameter("txtCod").equals("")){
-				mensaje+= "El codigo de producto no puede estar vacio\n";
-			}
-			if(request.getParameter("txtStock").equals("")){
-				mensaje+= "El stocl no puede estar vacio\n";
-			}
-			if(request.getParameter("txtImporte").equals("")){
-				mensaje+= "El importe  no puede estar vacia\n";
-			}
-			if(fechaStr.equals("")){
-				mensaje+= "La fecha no puede estar vacia\n";
-			}
-			if(descripcion.equals("")){
-				mensaje+= "La fecha no puede estar vacia\n";
-			}
-			if(!mensaje.equals("")){
-				throw new ApplicationException(mensaje, null);
-			}else{
-				fecha_desde = new SimpleDateFormat("yyyy-MM-dd").parse(fechaStr);
-				int codigo=Integer.parseInt(request.getParameter("txtCod"));
-				int stock = Integer.parseInt(request.getParameter("txtStock"));
-				pr=ctrl.getByCodigo(codigo);	
-				
-				importe=Float.parseFloat(request.getParameter("txtImporte"));	
-				ctrl.modificarProducto(pr, descripcion, stock,fecha_desde, importe);
-				pr=ctrl.getByCodigo(codigo);
-				request.setAttribute("producto", pr);
-			    request.setAttribute("mensajeConfirmacion", "El producto fue modificado con exito");
-			    request.getRequestDispatcher("modificarProducto.jsp").forward(request, response);
-				
-			}
-		}else{
-			throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
-		}
+				try{
+				if(empleado!=null && empleado.getLegajo()!=0){
+					if(request.getParameter("txtCod").equals("")){
+						mensaje+= "El codigo de producto no puede estar vacio\n";
+					}
+					if(request.getParameter("txtStock").equals("")){
+						mensaje+= "El stocl no puede estar vacio\n";
+					}
+					if(request.getParameter("txtImporte").equals("")){
+						mensaje+= "El importe  no puede estar vacia\n";
+					}
+					if(fechaStr.equals("")){
+						mensaje+= "La fecha no puede estar vacia\n";
+					}
+					if(descripcion.equals("")){
+						mensaje+= "La fecha no puede estar vacia\n";
+					}
+					if(!mensaje.equals("")){
+						throw new ApplicationException(mensaje, null);
+					}else{
+						fecha_desde = new SimpleDateFormat("yyyy-MM-dd").parse(fechaStr);
+						int codigo=Integer.valueOf(request.getParameter("txtCod"));
+						int stock = Integer.valueOf(request.getParameter("txtStock"));
+						pr=ctrl.getByCodigo(codigo);	
+						
+						importe=Float.parseFloat(request.getParameter("txtImporte"));	
+						ctrl.modificarProducto(pr, descripcion, stock,fecha_desde, importe);
+						pr=ctrl.getByCodigo(codigo);
+						request.setAttribute("producto", pr);
+					    request.setAttribute("mensajeConfirmacion", "El producto fue modificado con exito");
+					    request.getRequestDispatcher("modificarProducto.jsp").forward(request, response);
+						
+					}
+				}else{
+					throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
+				}
 		}catch (NumberFormatException e) {
 			String msj="";
 			if(!esEntero(request.getParameter("txtCod"))) msj+="El código de producto debe ser un número entero. \n";
 			if(!esEntero(request.getParameter("txtStock"))) msj+="El código de producto debe ser un número entero. \n";
 			if(!esFloat(request.getParameter("txtImporte"))) msj+="El importe debe ser un numero\n";
 			request.setAttribute("mensaje", msj);
-			request.getRequestDispatcher("modificarProducto.jsp").forward(request, response);
+			request.getRequestDispatcher("buscarProducto.jsp").forward(request, response);
 		}catch(ParseException e){
 
 			request.setAttribute("mensaje", "formato de la fecha no es valido, intente con YYYY-mm-dd");
-			request.getRequestDispatcher("modificarProducto.jsp").forward(request, response);
+			request.getRequestDispatcher("buscarProducto.jsp").forward(request, response);
 		
 		}catch (NullPointerException e) {
 			request.setAttribute("mensaje", "No se encontro producto con el código ingresado");
-			request.getRequestDispatcher("modificarProducto.jsp").forward(request, response);
+			request.getRequestDispatcher("buscarProducto.jsp").forward(request, response);
 		} catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
-			request.getRequestDispatcher("modificarProducto.jsp").forward(request, response);
+			request.getRequestDispatcher("buscarProducto.jsp").forward(request, response);
 		}
 	}
 	private boolean esEntero(String cadena){

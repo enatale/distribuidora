@@ -13,19 +13,19 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery-1.12.3.min.js"></script>
-    <script src="js/alta.js"></script>
+    <script src="js/modificarProd.js"></script>
   </head>
 </head>
 <body>
   <%@ include file="headerEmp.jsp" %>
   
   <% Producto prod=new Producto();
-  prod=(Producto)request.getAttribute("producto"); %>
+     prod=(Producto)request.getAttribute("producto"); %>
   
    <div class="container theme-showcase" role="main">
     	<div class="row">
     		<div class="col-sm-6 col-sm-offset-3">
-	            <form action="ModificarProducto" method="post" id="formAltaProducto">
+	            <form action="ModificarProducto" method="post" id="formItem">
 	                <h1>Modificar Producto</h1>
 	                
 	                 <label for="txtCod" class="sr-only">Codigo</label>

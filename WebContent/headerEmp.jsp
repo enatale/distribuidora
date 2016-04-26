@@ -33,7 +33,7 @@
 				 </a>
 				 <!-- dropdown-->
 				  <ul class="dropdown-menu" role="menu">
-				    <li><a href="ListadoCliPendientes">Confirmar clientes</a></li>
+				    <li><a href="listadoCliPendientes.jsp">Confirmar clientes</a></li>
 				  </ul>
 			  </li>
 			<li class="dropdown">

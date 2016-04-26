@@ -1,5 +1,6 @@
 <%@page import="entidades.Cliente"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="negocio.CtrlPersona"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -18,8 +19,9 @@
 
 	   <%@ include file="headerEmp.jsp" %>
 	   
-	   <% ArrayList<Cliente> clientes; 
-			clientes=(ArrayList<Cliente>) request.getAttribute("clientes"); %>
+	   <% ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+	   	CtrlPersona ctrl = new CtrlPersona();
+			clientes=(ArrayList<Cliente>)ctrl.getCliListadoConfirmar(); %>
 			
 
 <div class="row" style="text-align: center">
@@ -30,6 +32,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th> </th>
         <th>Nombre</th>
         <th>Apellido</th>
         <th>CUIT</th>
@@ -38,12 +41,12 @@
       </tr>
     </thead>
     <tbody>
-    <%  if(clientes!=null){
+    <%  if(clientes.size()!=0){
 	    for (Cliente cli : clientes) {
     %>
       <tr>
         <form method="post" action="ListadoCliPendientes">
-        <td><input type="text" id="txtDni" name="txtDni" class="form-control"  value="<%=cli.getDni()%>" size="11" style="visibility:hidden"></td>
+        <td><input type="text" id="txtDni" name="txtDni" class="form-control"  value="<%=cli.getDni()%>" size="11" style="width:50px;visibility:hidden"></td>
         <td><%=cli.getNombre() %></td>
         <td><%=cli.getApellido() %></td>
         <td><%=cli.getCUIT() %></td>

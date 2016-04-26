@@ -292,12 +292,13 @@ public class dataProducto {
 		stmtProducto.setInt(3, pr.getCodProducto());
 		stmtProducto.execute();
 		stmtPrecio = FactoryConexion.getInstancia().getConnection().prepareStatement(
-				"update precios set importe = ?, fecha_desde=?"
+				"update precios set importe = ?, fecha_desde=? "
 				+ "where codProducto=? and fecha_desde = ?");
 		stmtPrecio.setFloat(1, pr.getImporte());
 		stmtPrecio.setDate(2, new java.sql.Date(fecha.getTime()));
 		stmtPrecio.setInt(3, pr.getCodProducto());
 		stmtPrecio.setDate(4, new java.sql.Date(pr.getFecha().getTime()));
+		stmtPrecio.execute();
 		} catch (SQLException e) {
 			try {
 				FactoryConexion.getInstancia().getConnection().rollback();

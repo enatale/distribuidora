@@ -29,7 +29,7 @@ public class CtrlProducto {
 	public void actualizarPrecio(Producto pr,float importe,Date fecha_desde) throws ApplicationException{
 		dprod.actualizarPrecio(pr, importe, fecha_desde);
 	}
-	public void modificarProducto(Producto pr, String descripcion,int stock, java.util.Date fecha, float importe) throws ApplicationException{
+	public void modificarProducto(Producto pr, String descripcion,int stock, Date fecha, float importe) throws ApplicationException{
 		dprod.modificarProducto(pr,descripcion,stock, fecha, importe);
 	}
 

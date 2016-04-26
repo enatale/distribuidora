@@ -27,7 +27,7 @@ $(document).ready(function(){
 		validarFecha();
 	});
 	$("#txtStock").focusout(function(e) {
-		validarCant();
+		validarStock();
 	});
 //	$("#txtFecha").focusout(function(e) {
 	//	validaFechaAAAAMMDD();
@@ -38,48 +38,8 @@ $(document).ready(function(){
 	
 });//DOCUMENT READY
 
-function mostrarProducto(respuesta){
-	var producto = $.parseJSON(respuesta);
-	$("#cuerpo").html("");
-	if(producto==null){
-		$("#cuerpo").html('<tr><td colspan="3"><h2>No se encontró producto con el código ingresado.</h2></td></tr>');
-	} else{
-		$("#cuerpo").append(
-			"<tr id='1'>"+
-				"<td id='cod1'>"+producto.codProducto+"</td>"+
-				"<td id='desc1'>"+producto.descripcion+"</td>"+
-				"<td>"+producto.stock+"</td>"+
-			"</tr>"
-		);
-		$("tr").click(fila_click);
-	}
-}
 
-function llenarTabla(respuesta){
-	var productos = $.parseJSON(respuesta);
-	$("#cuerpo").html("");
-	if(productos.length==0){
-		$("#cuerpo").html('<tr><td colspan="3"><h2>No se encontraron productos que coincidan con la descripción.</h2></td></tr>');
-	}else {
-		for (i=1;i<=productos.length;i++){
-			$("#cuerpo").append(
-				"<tr id='"+i+"'>"+
-					"<td id='cod"+i+"'>"+productos[i-1].codProducto+"</td>"+
-					"<td id='desc"+i+"'>"+productos[i-1].descripcion+"</td>"+
-				"</tr>"
-			);
-		}
-		$("tr").click(fila_click);
-	}
-}
 
-function fila_click(){
-	var fila = $(this).attr("id");
-    var cod = $("#cod"+fila).html();
-	var descr = $("#desc"+fila).html();
-	$("#txtCod").val(cod);
-	$("#txtDescripcion").val(descr);
-}
 
 function validarDesc(){
 	$("#errorDescripcion").html("");
@@ -101,7 +61,14 @@ function validarImporte(){
 		$("#txtImporte").attr("style","background:#f2dede");
 		$("#errorImporte").html("El importe no puede estar en blanco");
 		return false;
-	} else return true;
+	} else {
+		if(isNaN(imp)){
+			$("#txtImporte").attr("style","background:#f2dede");
+			$("#errorImporte").html("El importe debe ser un entero");
+			return false;
+		}else return true;
+	}
+	
 }
 
 function validarCod(){
@@ -159,5 +126,12 @@ function validarStock(){
 		$("#txtStock").attr("style","background:#f2dede");
 		$("#errorStock").html("El stock no puede estar en blanco");
 		return false;
-	} else return true;
+	} else {
+		if(isNaN(cant)){
+			$("#txtStock").attr("style","background:#f2dede");
+			$("#errorStock").html("El stock debe ser un entero");
+			return false;
+		}else return true;
+	}
+	
 }
