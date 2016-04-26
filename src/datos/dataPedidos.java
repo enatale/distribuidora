@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import appExceptions.ApplicationException;
+import entidades.Cliente;
 import entidades.Estado_pedido;
 import entidades.Linea_pedido;
 import entidades.Pedidos;
@@ -127,7 +128,7 @@ public class dataPedidos {
 				ped.setFecha_cancelacion(rs.getDate("fecha_cancelacion"));
 				ped.setFecha_pedido(rs.getDate("fecha_pedido"));
 				ped.setNumero_pedido(rs.getInt("numero_pedido"));
-				ped.setCliente(dper.getByDni(rs.getInt("dni")));
+				ped.setCliente((Cliente)dper.getByDni(rs.getInt("dni")));
 				
 				stmtLineas = FactoryConexion.getInstancia().getConnection().prepareStatement(
 						"select * from linea_pedido where numero_pedido=?");

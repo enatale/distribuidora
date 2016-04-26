@@ -7,7 +7,7 @@ public class Pedidos {
 	private int numero_pedido;
 	private Date fecha_pedido;
 	private Date fecha_cancelacion;
-	private Persona cliente;
+	private Cliente cliente;
 	private Estado_pedido estado;
 	private ArrayList<Linea_pedido> lineas;
 	
@@ -24,10 +24,10 @@ public class Pedidos {
 	public void setEstado(Estado_pedido estado) {
 		this.estado = estado;
 	}
-	public Persona getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
-	public void setCliente(Persona cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 	public int getNumero_pedido() {
