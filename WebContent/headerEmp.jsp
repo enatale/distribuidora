@@ -25,7 +25,6 @@
 				    <li><a href="buscarProducto.jsp">Modificar Producto</a></li>
 				    <li><a href="actualizarStock.jsp">Actualizacion de Stock</a></li>
 				    <li><a href="actualizarPrecio.jsp">Actualizacion de Precio</a></li>
-				    <li><a href="productosSinStock.jsp">Listado de productos sin stock</a></li>
 				  </ul>
 			  </li>
             <li class="dropdown">
@@ -53,6 +52,8 @@
 				 <!-- dropdown-->
 				  <ul class="dropdown-menu" role="menu">
 				    <li><a href="reportePrecios.jsp">Lista de precios</a></li>
+				    <li><a href="buscarPedidos.jsp">Lista de Pedidos</a></li>
+				    <li><a href="productosSinStock.jsp">Listado de productos sin stock</a></li>
 				  </ul>
 			  </li>
           </ul>

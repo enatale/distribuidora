@@ -101,4 +101,9 @@ public class CtrlPedidos {
 		return dprod.getAll(inicio, cant_por_pagina, fecha);
 	}
 
+	public ArrayList<Pedidos> buscarPedidosFecha(Date fInicio, Date fFin,
+			String estado) throws ApplicationException {
+		return dped.buscarPedidosFecha(fInicio,fFin,estado);
+	}
+
 }

@@ -42,11 +42,11 @@ public class FactoryConexion {
 			if(connection==null||connection.isClosed()){
 				
 				//PARA SERVIDOR
-				connection= DriverManager.getConnection(
-						"jdbc:mysql://node124276-distribuidora.j.layershift.co.uk/"+db+"?user="+user+"&password="+pass);
+//				connection= DriverManager.getConnection(
+//						"jdbc:mysql://node124276-distribuidora.j.layershift.co.uk/"+db+"?user="+user+"&password="+pass);
 				
 				//PARA USAR LOCAL
-//				connection= DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+pass);
+				connection= DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+pass);
 				
 				
 				

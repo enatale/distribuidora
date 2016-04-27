@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import appExceptions.ApplicationException;
 import entidades.Cliente;
@@ -400,5 +401,44 @@ public class dataPedidos {
 			}
 			
 		}
+	}
+
+	public ArrayList<Pedidos> buscarPedidosFecha(Date fInicio, Date fFin,
+			String estado) throws  ApplicationException {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Pedidos> pedidos = new ArrayList<Pedidos>();
+		Pedidos pd;
+		try {
+			stmt = FactoryConexion.getInstancia().getConnection().prepareStatement(
+					"select * "
+					+ "from pedidos "
+					+ " inner join estado_pedido "
+					+ " on pedidos.id_estado_pedido=estado_pedido.id_estado_pedido "
+					+ " where descripcion_estado=? and fecha_pedido between ? and ?");
+			stmt.setString(1, estado);
+			stmt.setDate(2, new java.sql.Date(fInicio.getTime()));
+			stmt.setDate(3, new java.sql.Date(fFin.getTime()));
+			rs=stmt.executeQuery();
+			if(rs.next()){
+				pd= new Pedidos();
+				pd.setNumero_pedido(rs.getInt("numero_pedido"));
+				pd.setFecha_pedido(rs.getDate("fecha_pedido"));
+				pedidos.add(pd);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			try {
+				if(stmt!=null) stmt.close();
+				if(rs!=null) rs.close();
+				FactoryConexion.getInstancia().getConnection().close();
+			} catch (SQLException e) {
+				throw new ApplicationException("Error al cerrar conexiones con la base de datos", e);
+			}
+		}
+
+		return pedidos;
 	}
 }
