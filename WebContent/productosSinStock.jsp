@@ -46,7 +46,7 @@
       </tr> 
       <% }
 	    }else{%>
-	    <h2>No hay clientes con estado pendiente</h2>
+	    <h2>No hay hay productos sin stock</h2>
 	    <% } %>
     </tbody>
   </table>

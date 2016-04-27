@@ -12,7 +12,7 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery-1.12.3.min.js"></script>
-    <script src="js/actuaPrecio.js"></script>
+    <script src="js/buscarPedidos.js"></script>
   </head>
 </head>
 <body>
@@ -26,11 +26,11 @@
 	                
 	                <label for="txtFechaIni" class="sr-only">Fecha Inicio</label>
                	    <input type="date" id="txtFechaIni" name="txtFechaIni" class="form-control" placeholder="Fecha de Inicio">
-              	    <label for="txtFechaIni" id="errorCodIni" style="color:#FF0004"></label>
+              	    <label for="txtFechaIni" id="errorFechIni" style="color:#FF0004"></label>
 	                 
 	                <label for="txtFechaFin" class="sr-only">Fecha Fin</label>
                	    <input type="date" id="txtFechaFin" name="txtFechaFin" class="form-control" placeholder="Fecha de Fin">
-              	    <label for="txtFechaFin" id="errorCodFin" style="color:#FF0004"></label>
+              	    <label for="txtFechaFin" id="errorFechFin" style="color:#FF0004"></label>
               	    
               	     <select class="form-control" name="Estado">
 					  <option value="Pendiente">Pendiente</option>
