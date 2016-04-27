@@ -42,7 +42,7 @@
 	                
 	               
 	                <label for="txtFecha" class="sr-only">Fecha Importe</label>
-	                <input type="text" id="txtFecha" name="txtFecha" class="form-control" value="<%=prod.getFecha()%>">
+	                <input type="date" id="txtFecha" name="txtFecha" class="form-control" value="<%=prod.getFecha()%>">
 	                <label for="txtFecha" id="errorFecha" style="color:#FF0004"></label>
 	                
 	                <label for="txtImporte" class="sr-only">Importe</label>
