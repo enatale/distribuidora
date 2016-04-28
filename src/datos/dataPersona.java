@@ -176,8 +176,7 @@ public class dataPersona {
 				CliPendiente.add(cli);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al recuperar listado de personas en estado pendiente de la base de datos", e);
 		}finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -194,7 +193,6 @@ public class dataPersona {
 	public void actualizarEstadoCliente(String estado, int dni) throws ApplicationException{
 		PreparedStatement stmtBuscarEstado =null;
 		PreparedStatement stmtActualizarEstado = null;
-		int id_estado=0;
 		ResultSet rs = null;
 		
 		try {
@@ -211,8 +209,7 @@ public class dataPersona {
 			stmtActualizarEstado.execute();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al recuperar actualizar estado del cliente en la base de datos", e);
 		} finally{
 			try {
 				if(stmtBuscarEstado!=null) stmtBuscarEstado.close();
@@ -256,8 +253,7 @@ public class dataPersona {
 				stmt.execute();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error agregar un cliente en la base de datos", e);
 		} finally {
 			try {
 				if(stmtBuscarEstado!=null) stmtBuscarEstado.close();
@@ -284,8 +280,7 @@ public class dataPersona {
 			}
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al recuperar el codigo del ultimo cliente de la base de datos", e);
 		}finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -297,7 +292,7 @@ public class dataPersona {
 		}
 		return proxNum;
 	}
-
+//verifica que no exista el nombre de usuario para agregar otro usuario
 	public boolean verificarUser(String usuario) throws ApplicationException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -311,8 +306,7 @@ public class dataPersona {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al recuperar nombres de usuario de la base de datos", e);
 		}finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -339,8 +333,7 @@ public class dataPersona {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al recuperar dni de clientes de la base de datos", e);
 		}finally{
 			try {
 				if(stmt!=null) stmt.close();

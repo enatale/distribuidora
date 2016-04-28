@@ -77,10 +77,10 @@ public class ListadoCliPendientes extends HttpServlet {
 			String msj="";
 			if(!esEntero(request.getParameter("txtStock"))) msj+="El código de producto debe ser un número entero. \n";
 			request.setAttribute("mensaje", msj);
-			request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
+			request.getRequestDispatcher("ListadoCliPendientes.jsp").forward(request, response);
 		}catch (ApplicationException e){
 			request.setAttribute("mensaje", e.getMessage());
-			request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+			request.getRequestDispatcher("ListadoCliPendientes.jsp").forward(request, response);
 		}
 	
 	}

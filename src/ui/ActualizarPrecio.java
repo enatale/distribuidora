@@ -73,11 +73,11 @@ public class ActualizarPrecio extends HttpServlet {
 				ctrl.actualizarPrecio(pr,importe, fecha_desde);
 
 			    request.setAttribute("mensajeConfirmacion", "El precio fue modificado con exito");
-			    request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
+			    request.getRequestDispatcher("actualizarPrecio.jsp").forward(request, response);
 				}
 			}
 		}else{
-			throw new ApplicationException("debe estar logueado como empleado para actualizar el stock", null);
+			throw new ApplicationException("debe estar logueado como empleado para actualizar el precio", null);
 		}
 		}catch (NumberFormatException e) {
 			String msj="";

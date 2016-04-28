@@ -61,7 +61,7 @@ public class ActualizarStock extends HttpServlet {
 				cantidad=Integer.parseInt(request.getParameter("txtCantidad"));		
 				ctrl.actualizarStock(pr,cantidad);
 
-			    request.setAttribute("mensajeConfirmacion", "El producto fue modificado con exito");
+			    request.setAttribute("mensajeConfirmacion", "El stock del producto fue modificado con exito");
 			    request.getRequestDispatcher("actualizarStock.jsp").forward(request, response);
 				}
 			}

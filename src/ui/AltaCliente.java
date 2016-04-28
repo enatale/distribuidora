@@ -109,16 +109,16 @@ public class AltaCliente extends HttpServlet {
 						cli.setContraseña(pass);
 						cli.setCodCliente(codCliente);
 						ctrl.agregarCliente(cli);
-					    request.setAttribute("mensajeConfirmacion", "Cliente fue registrado con exito");
+					    request.setAttribute("mensajeConfirmacion", "Registro realizado con exito");
 					    request.getRequestDispatcher("altaProducto.jsp").forward(request, response);
 					
 					}
 	
 		}catch (NumberFormatException e) {
 			String msj="";
-			if(!esEntero(request.getParameter("txtDni"))) msj+="El código de producto debe ser un número entero. \n";
-			if(!esEntero(request.getParameter("txtTelefono"))) msj+="La cantidad debe ser un número entero. \n";
-			if(!esEntero(request.getParameter("txtCUIT"))) msj+="La cantidad debe ser un número entero. \n";
+			if(!esEntero(request.getParameter("txtDni"))) msj+="El código el dni debe ser un número. \n";
+			if(!esEntero(request.getParameter("txtTelefono"))) msj+="El telefono debe ser un número. \n";
+			if(!esEntero(request.getParameter("txtCUIT"))) msj+="El CUIT debe ser un número. \n";
 			request.setAttribute("mensaje", msj);
 			request.getRequestDispatcher("registro.jsp").forward(request, response);
 		} catch (ApplicationException e){

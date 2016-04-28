@@ -164,7 +164,12 @@ public class dataProducto {
 			stmtPrecio.execute();
 			
 			} catch (SQLException e) {
-				e.printStackTrace();
+				try {
+					FactoryConexion.getInstancia().getConnection().rollback();
+				} catch (SQLException e1) {
+					throw new ApplicationException("Error al recuperar producto en la base de datos", e);
+				}
+				throw new ApplicationException("Error al registrar nuevo producto en la base de datos", e);
 			} finally {
 				try {
 				if(stmtProd!=null) stmtProd.close();
@@ -358,8 +363,7 @@ public class dataProducto {
 			stmt.setInt(2, pr.getCodProducto());
 			stmt.execute();
 		} catch (SQLException e) {
-			//throw new ApplicationException("Error al actualizar el stock del producto de la base de datos", e);
-			e.printStackTrace();
+			throw new ApplicationException("Error al actualizar el stock del producto de la base de datos", e);
 		} finally{
 			try {
 				if(stmt != null) stmt.close();
@@ -458,8 +462,7 @@ public class dataProducto {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al recuperar productos sin stock en la base de datos", e);
 		} finally{
 			try {
 				if(stmt != null) stmt.close();

@@ -388,8 +388,7 @@ public class dataPedidos {
 		stmt.execute();
 		}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al actualizar estado del pedido de la base de datos", e);
 		}finally{
 			try {
 				if(stmtEstado!=null) stmtEstado.close();
@@ -427,8 +426,7 @@ public class dataPedidos {
 				pedidos.add(pd);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ApplicationException("Error al recuperar pedido entre fechas de la base de datos", e);
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();

@@ -40,7 +40,7 @@ public class ActualizarEstadoPedido extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	CtrlPedidos ctrl = new CtrlPedidos();
 	String mensaje="";
 	Pedidos ped;
@@ -62,7 +62,7 @@ public class ActualizarEstadoPedido extends HttpServlet {
 					ctrl.actualizarEstadoPedido(numero,estado);
 					ped=ctrl.getByNroPedido(numero);
 					request.setAttribute("pedido", ped);
-					request.setAttribute("mensajeConfirmacion", "actualizado");
+					request.setAttribute("mensajeConfirmacion", "El estado del pedido ha sido actualizado");
 					request.getRequestDispatcher("actualizarEstadoPedido.jsp").forward(request, response);
 				}	
 			}else{
