@@ -13,22 +13,12 @@ import entidades.Producto;
 
 public class CtrlPedidos {
 	
-	dataPersona dper;
 	dataProducto dprod;
 	dataPedidos dped;
 	
 	public CtrlPedidos(){
-		dper = new dataPersona();
 		dprod = new dataProducto();
 		dped = new dataPedidos();
-	}
-	
-	public Persona identificarPersona(String usuario, String contraseña) throws ApplicationException {
-		Persona p = dper.getByUsuario(usuario, contraseña);
-		if(p instanceof Cliente && ((Cliente) p).getEstado().getDescripcion().equals("Pendiente")){
-			throw new ApplicationException("Su cuenta aún no ha sido aprobada para utilizar el sistema", null);
-		}
-		return p;
 	}
 
 	public ArrayList<Producto> getAll(int desde, int hasta) throws ApplicationException{
@@ -47,18 +37,6 @@ public class CtrlPedidos {
 		return dprod.getByCodigo(codigo);
 	}
 
-	/*public boolean cantidadSuficiente(Producto producto, int cantidad) throws ApplicationException {
-		try{
-			int stock=dprod.getStock(producto.getCodProducto());
-			if(stock>=cantidad){
-				return true;
-			} else{
-				throw new ApplicationException("No se agrego el producto a su pedido. Solo quedan "+ stock +"de ese producto", null);
-			}
-		} catch(NullPointerException e) {
-			throw new ApplicationException("No se encontró producto con el código ingresado", e.getCause());
-		}
-	}*/
 	public int obtenerStock(Producto producto) throws ApplicationException{
 		int stock = 0;
 		try{
@@ -89,9 +67,10 @@ public class CtrlPedidos {
 	}
 	
 	public Pedidos getByNroPedido(int nroPedido) throws ApplicationException{
-
 		return dped.getByNroPedido(nroPedido);
 	}
+	
+	
 	public void actualizarEstadoPedido(int numPed,String estado) throws ApplicationException{
 
 		 dped.actualizarEstadoPedido(numPed, estado);

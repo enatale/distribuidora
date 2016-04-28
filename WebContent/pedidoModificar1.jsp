@@ -34,7 +34,7 @@
     	<%
     	}else {
     		try{
-    			nrosPendientes = new CtrlModificarPedido().getNrosPedidosPendientes(cliente);
+    			nrosPendientes = new CtrlModificarPedido().getNrosPedidosPendientes(cliente.getDni());
     			
     		}catch (ApplicationException e){
     			msj=e.getMessage();
