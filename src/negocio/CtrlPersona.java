@@ -5,12 +5,21 @@ import java.util.ArrayList;
 import appExceptions.ApplicationException;
 import datos.dataPersona;
 import entidades.Cliente;
+import entidades.Persona;
 
 public class CtrlPersona {
 	dataPersona dper;
 	
 	public CtrlPersona(){
 		dper=new dataPersona();
+	}
+	
+	public Persona identificarPersona(String usuario, String contraseña) throws ApplicationException {
+		Persona p = dper.getByUsuario(usuario, contraseña);
+		if(p instanceof Cliente && ((Cliente) p).getEstado().getDescripcion().equals("Pendiente")){
+			throw new ApplicationException("Su cuenta aún no ha sido aprobada para utilizar el sistema", null);
+		}
+		return p;
 	}
 	
 	public ArrayList<Cliente> getCliListadoConfirmar() throws ApplicationException{

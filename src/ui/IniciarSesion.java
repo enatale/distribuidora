@@ -12,6 +12,7 @@ import entidades.Cliente;
 import entidades.Empleado;
 import entidades.Persona;
 import negocio.CtrlPedidos;
+import negocio.CtrlPersona;
 
 /**
  * Servlet implementation class IniciarSesion
@@ -47,7 +48,7 @@ public class IniciarSesion extends HttpServlet {
 		} else{
 			Persona persona;
 			try {
-				persona = new CtrlPedidos().identificarPersona(usuario,contraseña);
+				persona = new CtrlPersona().identificarPersona(usuario,contraseña);
 				if(persona==null){
 					request.setAttribute("mensaje", "Usuario y/o contraseña incorrectos");
 					request.getRequestDispatcher("iniciarSesion.jsp").forward(request, response);

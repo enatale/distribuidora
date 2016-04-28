@@ -15,8 +15,8 @@ public class CtrlModificarPedido {
 		dped = new dataPedidos();
 	}
 	
-	public ArrayList<Integer> getNrosPedidosPendientes(Cliente cliente) throws ApplicationException{
-		return dped.getNrosPedidosPendientes(cliente.getDni());
+	public ArrayList<Integer> getNrosPedidosPendientes(int dni) throws ApplicationException{
+		return dped.getNrosPedidosPendientes(dni);
 	}
 	public Pedidos getByNro(int nroPedido) throws ApplicationException{
 		
