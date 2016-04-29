@@ -31,8 +31,7 @@
 		Integer totalPaginas;
 		Integer pagina;
 		String fecha;
-		//TODO aumentar cant por pag
-		int cant_por_pagina=2;
+		int cant_por_pagina=10;
 	try{
 		if(emp==null||emp.getLegajo()==0){
 			throw new ApplicationException("Para ver esta página debe iniciar sesión como empleado. ",null);

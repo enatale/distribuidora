@@ -10,7 +10,6 @@ import entidades.Cliente;
 import entidades.Empleado;
 import entidades.Estado_cliente;
 import entidades.Persona;
-import entidades.Producto;
 
 public class dataPersona {
 	

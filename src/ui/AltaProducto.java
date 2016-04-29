@@ -11,12 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import negocio.CtrlPedidos;
 import negocio.CtrlProducto;
 import appExceptions.ApplicationException;
-import entidades.Cliente;
 import entidades.Empleado;
-import entidades.Persona;
 import entidades.Producto;
 
 /**
@@ -31,14 +28,13 @@ public class AltaProducto extends HttpServlet {
      */
     public AltaProducto() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -71,7 +67,6 @@ public class AltaProducto extends HttpServlet {
 					int stock=Integer.parseInt(request.getParameter("txtStock"));
 					float importe=Float.parseFloat(request.getParameter("txtImporte"));
 					String fechaStr = ((String)request.getParameter("txtFecha")).trim();
-					SimpleDateFormat sfd= null;
 					Date fecha_desde = null;
 				    fecha_desde = new SimpleDateFormat("yyyy-MM-dd").parse(fechaStr);
 				   

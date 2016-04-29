@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import negocio.CtrlPersona;
 import appExceptions.ApplicationException;
 import entidades.Cliente;
-import entidades.Empleado;
 
 /**
  * Servlet implementation class altaCliente
@@ -25,14 +24,13 @@ public class AltaCliente extends HttpServlet {
      */
     public AltaCliente() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request,response);
 	}
 
@@ -40,7 +38,6 @@ public class AltaCliente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	//	Persona persona = (Persona) request.getSession().getAttribute("usuario");
 		Cliente cli;
 		CtrlPersona ctrl = new CtrlPersona();

@@ -12,7 +12,6 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery-1.12.3.min.js"></script>
-    </script>
   </head>
   <body>
   

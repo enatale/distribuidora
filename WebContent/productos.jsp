@@ -22,7 +22,17 @@
   </head>
 
 <%@ include file="header.jsp" %>
-<% 	ArrayList<Producto> productos; 
+<%
+String mensaje=(String)request.getAttribute("mensajeError");
+if(mensaje!=null){
+		%>
+			<div class="alert alert-danger" role="alert">
+			<strong>ERROR!</strong><%=mensaje %> 
+			</div>
+		<%
+		}
+else{
+	ArrayList<Producto> productos; 
 	productos=(ArrayList<Producto>) request.getAttribute("productos");
 	Integer totalPaginas=(Integer)request.getAttribute("totalPaginas");
 	Integer pagina = (Integer)request.getAttribute("pagina");
@@ -67,6 +77,7 @@
 			<%
 		}
 	}
+}
 }
 %></h1>
 </div>

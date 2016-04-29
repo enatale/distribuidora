@@ -18,6 +18,8 @@ public class CtrlPersona {
 		Persona p = dper.getByUsuario(usuario, contraseña);
 		if(p instanceof Cliente && ((Cliente) p).getEstado().getDescripcion().equals("Pendiente")){
 			throw new ApplicationException("Su cuenta aún no ha sido aprobada para utilizar el sistema", null);
+		} if(p instanceof Cliente && ((Cliente) p).getEstado().getDescripcion().equals("Rechazado")){
+			throw new ApplicationException("Su solicitud de registro ha sido rechazada", null);
 		}
 		return p;
 	}

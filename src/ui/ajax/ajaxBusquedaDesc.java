@@ -27,7 +27,7 @@ public class ajaxBusquedaDesc extends HttpServlet {
      */
     public ajaxBusquedaDesc() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -43,7 +43,7 @@ public class ajaxBusquedaDesc extends HttpServlet {
 			productos = ctrl.getByDescripcion(descripcion,inicio,cant_por_pagina);
 			response.getWriter().write(new Gson().toJson(productos));
 		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -52,7 +52,7 @@ public class ajaxBusquedaDesc extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request, response);
 	}
 

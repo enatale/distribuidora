@@ -28,14 +28,14 @@ public class ModificarProducto extends HttpServlet {
      */
     public ModificarProducto() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doPost(request, response);
 	}
 
@@ -43,7 +43,7 @@ public class ModificarProducto extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		String mensaje="";
 		float importe=0;
 		CtrlProducto ctrl= new CtrlProducto();
@@ -51,7 +51,6 @@ public class ModificarProducto extends HttpServlet {
 		Empleado empleado = (Empleado) request.getSession().getAttribute("usuario");
 		String fechaStr = ((String)request.getParameter("txtFecha"));
 		String descripcion =((String)request.getParameter("txtDescripcion")).trim();
-		SimpleDateFormat sfd= null;
 		Date fecha_desde = null;
 		
 				try{

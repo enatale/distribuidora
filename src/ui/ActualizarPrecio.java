@@ -28,21 +28,19 @@ public class ActualizarPrecio extends HttpServlet {
      */
     public ActualizarPrecio() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String mensaje="";
 		float importe=0;
 		CtrlProducto ctrl= new CtrlProducto();
 		Producto pr;
 		Empleado empleado = (Empleado) request.getSession().getAttribute("usuario");
 		String fechaStr = ((String)request.getParameter("txtFecha"));
-		SimpleDateFormat sfd= null;
 		Date fecha_desde = null;
 		
 			
@@ -118,7 +116,7 @@ public class ActualizarPrecio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request,response);
 	}
 

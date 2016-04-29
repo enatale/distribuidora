@@ -8,7 +8,6 @@ import datos.*;
 import entidades.Cliente;
 import entidades.Linea_pedido;
 import entidades.Pedidos;
-import entidades.Persona;
 import entidades.Producto;
 
 public class CtrlPedidos {

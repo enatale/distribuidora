@@ -8,13 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ui.pedido.Pedido;
 import negocio.CtrlPedidos;
-import negocio.CtrlProducto;
 import appExceptions.ApplicationException;
 import entidades.Empleado;
 import entidades.Pedidos;
-import entidades.Producto;
 
 /**
  * Servlet implementation class BuscarPedido
@@ -28,14 +25,14 @@ public class BuscarPedido extends HttpServlet {
      */
     public BuscarPedido() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doPost(request,response);
 	}
 
@@ -43,7 +40,7 @@ public class BuscarPedido extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		String mensaje="";
 		CtrlPedidos ctrl= new CtrlPedidos();
 		Pedidos ped = new Pedidos();

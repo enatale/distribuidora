@@ -28,7 +28,7 @@ public class ReportePrecios extends HttpServlet {
      */
     public ReportePrecios() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -40,7 +40,7 @@ public class ReportePrecios extends HttpServlet {
 		CtrlPedidos ctrl = new CtrlPedidos();
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		
-		int cant_por_pagina=2;
+		int cant_por_pagina=10;
 		if(request.getParameter("pagina")!=null){
 			pagina = Integer.parseInt(request.getParameter("pagina"));
 		} else pagina=0;
@@ -81,7 +81,7 @@ public class ReportePrecios extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request, response);
 	}
 
