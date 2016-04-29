@@ -29,14 +29,14 @@ public class ListadoPedidos extends HttpServlet {
      */
     public ListadoPedidos() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doPost(request,response);
 	}
 
@@ -44,15 +44,13 @@ public class ListadoPedidos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		String mensaje="";
 		CtrlPedidos ctrl= new CtrlPedidos();
-		Pedidos ped = new Pedidos();
 		Empleado empleado = (Empleado) request.getSession().getAttribute("usuario");
 		String fechaStrIni = ((String)request.getParameter("txtFechaIni"));
 		String fechaStrFin = ((String)request.getParameter("txtFechaFin"));
 		String estado = ((String)request.getParameter("Estado"));
-		SimpleDateFormat sfd= null;
 		ArrayList<Pedidos> pedidos = new ArrayList<Pedidos>();
 		try{
 		if(empleado!=null && empleado.getLegajo()!=0){

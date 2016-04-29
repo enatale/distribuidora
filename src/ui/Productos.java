@@ -24,7 +24,7 @@ public class Productos extends HttpServlet {
      * Default constructor. 
      */
     public Productos() {
-        // TODO Auto-generated constructor stub
+        // 
     	//super();
     }
 
@@ -36,7 +36,7 @@ public class Productos extends HttpServlet {
 		CtrlPedidos ctrl = new CtrlPedidos();
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		
-		int cant_por_pagina=2;
+		int cant_por_pagina=10;
 		if(request.getParameter("pagina")!=null){
 			pagina = Integer.parseInt(request.getParameter("pagina"));
 		} else pagina=0;
@@ -58,8 +58,8 @@ public class Productos extends HttpServlet {
 			request.getRequestDispatcher("productos.jsp").forward(request, response);
 			
 		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("mensajeError", e.getMessage());
+			request.getRequestDispatcher("productos.jsp").forward(request, response);
 		}
 	}
 

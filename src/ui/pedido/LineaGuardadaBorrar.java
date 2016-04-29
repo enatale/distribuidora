@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import appExceptions.ApplicationException;
-import entidades.Linea_pedido;
-import entidades.Pedidos;
 import negocio.CtrlModificarPedido;
-import negocio.CtrlPedidos;
 
 /**
  * Servlet implementation class BorrarLineaGuardada
@@ -25,7 +22,7 @@ public class LineaGuardadaBorrar extends HttpServlet {
      */
     public LineaGuardadaBorrar() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -57,7 +54,7 @@ public class LineaGuardadaBorrar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request, response);
 	}
 

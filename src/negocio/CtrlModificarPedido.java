@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import appExceptions.ApplicationException;
 import datos.dataPedidos;
-import entidades.Cliente;
 import entidades.Pedidos;
 
 public class CtrlModificarPedido {

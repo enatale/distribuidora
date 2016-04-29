@@ -37,6 +37,7 @@
 					  <option value="Preparado">Preparado</option>
 					  <option value="Entregado">Entregado</option>
 					  <option value="Pagado">Pagado</option>
+					  <option value="Cancelado">Cancelado</option>
 					</select>
               	    
 	                <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>

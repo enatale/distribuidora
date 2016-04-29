@@ -25,8 +25,7 @@ public class dataProducto {
 			}
 			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al obtener la cantidad de productos", null);			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -73,8 +72,8 @@ public class dataProducto {
 			}
 			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al obtener la lista de productos de la base de datos", null);			
+			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -122,8 +121,8 @@ public class dataProducto {
 			}
 			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al obtener la lista de productos desde la base de datos", null);			
+			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -212,8 +211,8 @@ public class dataProducto {
 			}
 			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al obtener el producto desde la base de datos", null);			
+			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -234,8 +233,8 @@ public class dataProducto {
 			stock = this.getStock(stmt, rs, codProducto);
 			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al obtener el stock del producto desde la base de datos", null);			
+			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -264,8 +263,7 @@ public class dataProducto {
 		try{
 			descontarStock(stmt,cantidad, codProducto);			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al descontar stock del producto en la base de datos", null);						
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -379,8 +377,8 @@ public class dataProducto {
 		try{
 			aumentarStock(stmt, codProducto, cantidad);			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al aumentar el stock del producto desde la base de datos", null);			
+			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();
@@ -431,8 +429,8 @@ public class dataProducto {
 			}
 			
 		} catch (SQLException e){
-			//TODO excepcion
-			e.printStackTrace();			
+			throw new ApplicationException("Error al obtener la lista de productos desde la base de datos", null);			
+			
 		} finally{
 			try {
 				if(stmt!=null) stmt.close();

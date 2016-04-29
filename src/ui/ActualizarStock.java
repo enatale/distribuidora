@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import negocio.CtrlPedidos;
 import negocio.CtrlProducto;
 import appExceptions.ApplicationException;
-import entidades.Cliente;
+
 import entidades.Empleado;
 import entidades.Producto;
 
@@ -27,14 +26,13 @@ public class ActualizarStock extends HttpServlet {
      */
     public ActualizarStock() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String mensaje="";
 		int cantidad=0;
 		CtrlProducto ctrl= new CtrlProducto();
@@ -95,7 +93,7 @@ public class ActualizarStock extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request,response);
 	}
 

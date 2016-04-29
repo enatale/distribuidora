@@ -1,7 +1,6 @@
 package ui.ajax;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +26,7 @@ public class ajaxBusquedaCod extends HttpServlet {
      */
     public ajaxBusquedaCod() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -41,7 +40,7 @@ public class ajaxBusquedaCod extends HttpServlet {
 			producto = ctrl.getByCodigo(codigo);
 			response.getWriter().write(new Gson().toJson(producto));
 		} catch (ApplicationException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -50,7 +49,7 @@ public class ajaxBusquedaCod extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 
 		doGet(request, response);
 	}
 

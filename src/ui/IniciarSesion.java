@@ -11,7 +11,6 @@ import appExceptions.ApplicationException;
 import entidades.Cliente;
 import entidades.Empleado;
 import entidades.Persona;
-import negocio.CtrlPedidos;
 import negocio.CtrlPersona;
 
 /**
@@ -26,7 +25,7 @@ public class IniciarSesion extends HttpServlet {
      */
     public IniciarSesion() {
         super();
-        // TODO Auto-generated constructor stub
+        // 
     }
 
 	/**
@@ -65,9 +64,6 @@ public class IniciarSesion extends HttpServlet {
 				request.setAttribute("mensaje", e.getMessage());
 				request.getRequestDispatcher("iniciarSesion.jsp").forward(request, response);
 			}
-			
-			
-			//TODO Probablemente la validacion de persona = null despues se maneje con un try catch
 			
 		}
 	}
