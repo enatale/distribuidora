@@ -107,7 +107,7 @@ public class AltaCliente extends HttpServlet {
 						cli.setCodCliente(codCliente);
 						ctrl.agregarCliente(cli);
 					    request.setAttribute("mensajeConfirmacion", "Registro realizado con exito");
-					    request.getRequestDispatcher("index.jsp").forward(request, response);
+					    request.getRequestDispatcher("registro.jsp").forward(request, response);
 					
 					}
 	
