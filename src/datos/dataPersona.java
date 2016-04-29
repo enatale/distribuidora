@@ -172,7 +172,7 @@ public class dataPersona {
 				cli.setNombre(rs.getString("nombre"));
 				cli.setApellido(rs.getString("apellido"));
 				cli.setMail(rs.getString("mail"));
-				cli.setCUIT(rs.getInt("CUIT"));
+				cli.setCUIT(rs.getLong("CUIT"));
 				CliPendiente.add(cli);
 			}
 		} catch (SQLException e) {
