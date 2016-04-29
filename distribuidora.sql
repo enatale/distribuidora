@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: distribuidora
+-- Host: localhost    Database: distribuidora
 -- ------------------------------------------------------
 -- Server version	5.6.25-log
 
@@ -87,6 +87,7 @@ CREATE TABLE `linea_pedido` (
 
 LOCK TABLES `linea_pedido` WRITE;
 /*!40000 ALTER TABLE `linea_pedido` DISABLE KEYS */;
+INSERT INTO `linea_pedido` VALUES (2,1,5),(2,7,30);
 /*!40000 ALTER TABLE `linea_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +109,7 @@ CREATE TABLE `pedidos` (
   KEY `FK_estado_pedido_idx` (`id_estado_pedido`),
   CONSTRAINT `FK_dni_personas` FOREIGN KEY (`dni`) REFERENCES `personas` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_idestado_estado_pedido` FOREIGN KEY (`id_estado_pedido`) REFERENCES `estado_pedido` (`id_estado_pedido`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +118,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
+INSERT INTO `pedidos` VALUES (1,'2016-03-03',NULL,3,11111111),(2,'2016-04-28','2016-04-28',5,11111111);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,6 +155,7 @@ CREATE TABLE `personas` (
 LOCK TABLES `personas` WRITE;
 /*!40000 ALTER TABLE `personas` DISABLE KEYS */;
 INSERT INTO `personas` VALUES (2455688,'Aurelio','asda',5466,'Belgrano 2481','5446','en','lalala',NULL,8,564548,3),(11111111,'Federico','Aguirre',4999999,'lalal 3665','aa@gmail.com','federico','aguirre',NULL,1,20165151985,1),(20663549,'Juan','Perez',4988025,'San Martin 2030','juance@yahoo.com','juan','123456',NULL,9,3222211,1),(22222222,'Juan Carlos','Almeida',4999999,'lalal 3665','aa@gmail.com','jc','almeida',NULL,2,564,2),(32213365,'Juan Pablo','Morettu',4645899,'Juan D. Peron 1010','jp@gmail.com','jp','jpjpjp',NULL,10,21322133655,3),(33333333,'Diego','Stroppiana',4999999,'lalal 3665','aa@gmail.com','diego','stroppiana',NULL,3,65465,1),(44444444,'Nicolas','Totaro',4999999,'lalal 3665','aa@gmail.com','nicolas','totaro',NULL,4,56546,3),(55555555,'Franco','Hernandez',4999999,'lalal 3665','aa@gmail.com','franco','hernandez',NULL,5,65446,1),(66666666,'Marco','Brusa',4999999,'lalal 3665','aa@gmail.com','marco','brusa',NULL,6,654564,2),(77777777,'Valentin','Marimon',4999999,'lalal 3665','aa@gmail.com','valentin','marimon',NULL,7,65456,1),(88888888,'Esteban','Natale',4999999,'lalal 3665','aa@gmail.com','esteban','natale',88888,NULL,NULL,NULL),(99999999,'Magali','Platero',4999999,'lalal 3665','aa@gmail.com','magali','platero',99999,NULL,NULL,NULL);
+
 /*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,6 +181,7 @@ CREATE TABLE `precios` (
 
 LOCK TABLES `precios` WRITE;
 /*!40000 ALTER TABLE `precios` DISABLE KEYS */;
+
 INSERT INTO `precios` VALUES (1,'2015-10-25',20),(1,'2016-03-25',30),(2,'2016-03-25',50.25),(3,'2016-03-25',75.66),(4,'2016-03-25',88.99),(5,'2016-03-25',77),(6,'2016-03-25',20),(7,'2016-03-25',30),(8,'2016-03-25',40),(8,'2016-12-25',153.25),(9,'2016-03-25',50),(9,'2016-04-01',55),(10,'2016-03-25',60),(11,'2016-12-25',563),(12,'2016-04-28',50),(13,'2016-03-16',100),(14,'2016-04-28',12.36),(15,'2015-04-28',20),(16,'2014-03-20',35),(17,'2016-04-28',30),(18,'2016-04-28',18),(19,'2016-04-26',12),(20,'2016-04-26',20),(21,'2014-04-26',50),(22,'2016-04-26',65);
 /*!40000 ALTER TABLE `precios` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -194,6 +198,7 @@ CREATE TABLE `productos` (
   `descripcion` varchar(100) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   PRIMARY KEY (`codProducto`)
+
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -203,7 +208,9 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+
 INSERT INTO `productos` VALUES (1,'coca cola',1025),(2,'azucar chango',1025),(3,'yerba',1025),(4,'fernet 1882',1025),(5,'vino toro',1025),(6,'escobas',1025),(7,'arroz susarelli',1025),(8,'fernet branca',1025),(9,'arroz peleador',1025),(10,'vino termidor',1025),(11,'Yerba Aguantadora',1025),(12,'Vino ViÃ±as de Balbo',1235),(13,'Vino Santa Julia',150),(14,'Galletitas Pepas Terepin',130),(15,'Yerba mate Amanda',103),(16,'Sal fina Celusal',3025),(17,'Sal gruesa Celusal',145),(18,'Sal fina Rinsal',654),(19,'Sal gruesa Rinsal',878),(20,'Aceite Marolio',5468),(21,'Aceite de oliva',3548),(22,'Chicles beldent x caja',65498);
+
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -217,3 +224,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-04-28 20:09:53
+
