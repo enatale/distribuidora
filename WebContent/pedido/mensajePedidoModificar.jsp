@@ -20,7 +20,7 @@
   </head>
   <body>
   
-    <%@ include file="../header.jsp" %>
+    <%@ include file="headerPedido.jsp" %>
 
     <div class="container" style="text-align: center;">
     <% 

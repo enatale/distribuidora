@@ -40,7 +40,7 @@ public class ReportePrecios extends HttpServlet {
 		CtrlPedidos ctrl = new CtrlPedidos();
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		
-		int cant_por_pagina=2;
+		int cant_por_pagina=10;
 		if(request.getParameter("pagina")!=null){
 			pagina = Integer.parseInt(request.getParameter("pagina"));
 		} else pagina=0;
